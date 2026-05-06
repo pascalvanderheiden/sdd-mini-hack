@@ -36,6 +36,7 @@ Build a small todo app from a spec. Validate it with the Playwright MCP server.
 **Extra prereqs**
 
 - OpenSpec: `npm install -g @fission-ai/openspec@latest`
+- VS Code extension: [OpenSpec for Copilot](https://marketplace.visualstudio.com/items?itemName=atman-dev.openspec-for-copilot) (`atman-dev.openspec-for-copilot`)
 
 **Demo video**
 
@@ -79,6 +80,7 @@ Run a small COBOL banking program, then use Spec Kit to specify, plan, task, and
   - Windows: install via [GnuCOBOL Windows builds](https://gnucobol.sourceforge.io/) or use WSL.
 - **Python 3.12+** and **uv**: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - **Spec Kit**: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git`
+- VS Code extension: [SpecKit Companion](https://marketplace.visualstudio.com/items?itemName=alfredoperez.speckit-companion) (`alfredoperez.speckit-companion`)
 
 **Demo video**
 
