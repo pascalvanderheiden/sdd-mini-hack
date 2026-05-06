@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="SDD Mini Hack — powered by GitHub Copilot">
+  <defs>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#ff004d"/>
+      <stop offset="16%"  stop-color="#ff7a00"/>
+      <stop offset="33%"  stop-color="#ffe600"/>
+      <stop offset="50%"  stop-color="#22e06a"/>
+      <stop offset="66%"  stop-color="#00c2ff"/>
+      <stop offset="83%"  stop-color="#7a5cff"/>
+      <stop offset="100%" stop-color="#ff3df8"/>
+    </linearGradient>
+    <style>
+      .ascii { font-family: 'Menlo','Monaco','Consolas','Courier New',monospace; font-size: 18px; font-weight: 700; letter-spacing: 0; fill: url(#rainbow); }
+      .sub   { font-family: 'Menlo','Monaco','Consolas','Courier New',monospace; font-size: 14px; font-weight: 700; fill: url(#rainbow); }
+      .coin  { font-family: 'Menlo','Monaco','Consolas','Courier New',monospace; font-size: 13px; font-weight: 700; fill: #ffe600; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#0d1117"/>
+  <g text-anchor="middle">
+    <text class="ascii" x="360" y="40" xml:space="preserve">███████╗██████╗ ██████╗     ███╗   ███╗██╗███╗   ██╗██╗</text>
+    <text class="ascii" x="360" y="62" xml:space="preserve">██╔════╝██╔══██╗██╔══██╗    ████╗ ████║██║████╗  ██║██║</text>
+    <text class="ascii" x="360" y="84" xml:space="preserve">███████╗██║  ██║██║  ██║    ██╔████╔██║██║██╔██╗ ██║██║</text>
+    <text class="ascii" x="360" y="106" xml:space="preserve">╚════██║██║  ██║██║  ██║    ██║╚██╔╝██║██║██║╚██╗██║██║</text>
+    <text class="ascii" x="360" y="128" xml:space="preserve">███████║██████╔╝██████╔╝    ██║ ╚═╝ ██║██║██║ ╚████║██║</text>
+    <text class="ascii" x="360" y="150" xml:space="preserve">╚══════╝╚═════╝ ╚═════╝     ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝</text>
+
+    <text class="ascii" x="360" y="186" xml:space="preserve">██╗  ██╗ █████╗  ██████╗██╗  ██╗</text>
+    <text class="ascii" x="360" y="208" xml:space="preserve">██║  ██║██╔══██╗██╔════╝██║ ██╔╝</text>
+    <text class="ascii" x="360" y="230" xml:space="preserve">███████║███████║██║     █████╔╝ </text>
+    <text class="ascii" x="360" y="252" xml:space="preserve">██╔══██║██╔══██║██║     ██╔═██╗ </text>
+    <text class="ascii" x="360" y="274" xml:space="preserve">██║  ██║██║  ██║╚██████╗██║  ██╗</text>
+
+    <text class="sub"  x="360" y="300">&gt;&gt; powered by GitHub Copilot &lt;&lt;</text>
+    <text class="coin" x="360" y="316">[ INSERT COIN ▸ PRESS ANY KEY ]</text>
+  </g>
+</svg>

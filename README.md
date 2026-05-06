@@ -1,4 +1,8 @@
-# SDD Mini Hack with GitHub Copilot
+<h1 align="center">SDD Mini Hack with GitHub Copilot</h1>
+
+<p align="center">
+  <img src="media/title.svg" alt="SDD Mini Hack — powered by GitHub Copilot" width="720">
+</p>
 
 > Learn spec-driven development and agentic engineering in one focused hour.
 
@@ -37,6 +41,9 @@ Build a small todo app from a spec. Validate it with the Playwright MCP server.
 
 https://github.com/user-attachments/assets/5faa2be8-b3c0-4fdc-a3bc-67c08038b732
 
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-1-openspec-greenfield.mp4" controls width="720"></video>
+
 → Follow [docs/scenario-1-openspec-todo.md](docs/scenario-1-openspec-todo.md)
 
 ---
@@ -52,6 +59,9 @@ Add a feature to the included **Bookshelf** app, then validate it through Playwr
 **Demo video**
 
 https://github.com/user-attachments/assets/3fe9613e-e51a-4692-af87-ffe3dd931c8f
+
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-2-plan-mode.mp4" controls width="720"></video>
 
 → Follow [docs/scenario-2-plan-mode-bookshelf.md](docs/scenario-2-plan-mode-bookshelf.md)
 
@@ -74,6 +84,9 @@ Run a small COBOL banking program, then use Spec Kit to specify, plan, task, and
 
 https://github.com/user-attachments/assets/21c5ae57-3ed1-4a28-84f5-ea962bc19ae4
 
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-3-speckit-legacy-modernization.mp4" controls width="720"></video>
+
 → Follow [docs/scenario-3-speckit-cobol.md](docs/scenario-3-speckit-cobol.md)
 
 ---
@@ -91,6 +104,9 @@ Use **Copilot CLI** with the **Squad** agent. Add a Squad team member that owns 
 **Demo video**
 
 https://github.com/user-attachments/assets/7b923c1d-a235-41e8-bcfd-54e54f6705de
+
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-4-squad-cli.mp4" controls width="720"></video>
 
 → Follow [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md)
 
