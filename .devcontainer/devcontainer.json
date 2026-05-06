@@ -1,0 +1,24 @@
+{
+  "name": "SDD Mini Hack",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-playwright.playwright",
+        "broadcommfd.cobol-language-support"
+      ],
+      "settings": {
+        "chat.agent.enabled": true
+      }
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y gnucobol && npm --version && python3 --version && gh --version"
+}

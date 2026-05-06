@@ -1,0 +1,10 @@
+{
+  "name": "bookshelf-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tiny brownfield sample for the SDD mini hack — Plan Mode scenario.",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

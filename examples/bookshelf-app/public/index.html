@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bookshelf</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>📚 Bookshelf</h1>
+    <p class="muted">A tiny reading list. Brownfield sample for the SDD mini hack.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="add-book-heading">
+      <h2 id="add-book-heading">Add a book</h2>
+      <form id="add-form">
+        <label>Title <input name="title" required /></label>
+        <label>Author <input name="author" required /></label>
+        <label>Status
+          <select name="status">
+            <option value="want">Want to read</option>
+            <option value="reading">Reading</option>
+            <option value="read">Read</option>
+          </select>
+        </label>
+        <button type="submit">Add book</button>
+        <p id="add-error" role="alert" class="error" hidden></p>
+      </form>
+    </section>
+
+    <section aria-labelledby="list-heading">
+      <h2 id="list-heading">Your books</h2>
+      <ul id="book-list" class="cards" aria-live="polite"></ul>
+      <p id="empty" class="muted" hidden>No books yet. Add one above.</p>
+    </section>
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

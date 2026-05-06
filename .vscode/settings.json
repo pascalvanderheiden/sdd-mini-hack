@@ -1,0 +1,7 @@
+{
+  "chat.agent.enabled": true,
+  "files.exclude": {
+    "**/node_modules": true
+  }
+}
+

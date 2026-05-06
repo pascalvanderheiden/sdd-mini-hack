@@ -1,0 +1,23 @@
+[
+  {
+    "id": "seed-1",
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt and David Thomas",
+    "status": "read",
+    "addedAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "seed-2",
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "status": "reading",
+    "addedAt": "2024-03-02T10:00:00.000Z"
+  },
+  {
+    "id": "seed-3",
+    "title": "A Philosophy of Software Design",
+    "author": "John Ousterhout",
+    "status": "want",
+    "addedAt": "2024-05-20T10:00:00.000Z"
+  }
+]

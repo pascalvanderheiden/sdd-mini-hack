@@ -1,0 +1,17 @@
+===========================================
+         DAILY ACCOUNT REPORT              
+===========================================
+TRANSACTIONS:
+  ACC 1001 DEPOSIT       $250.00 -> APPLIED
+  ACC 1002 WITHDRAWAL    $100.00 -> REJECTED (insufficient funds)
+  ACC 1003 DEPOSIT       $500.00 -> APPLIED
+  ACC 1004 WITHDRAWAL    $500.00 -> REJECTED (insufficient funds)
+  ACC 1099 DEPOSIT       $100.00 -> REJECTED (unknown account)
+  ACC 1001 WITHDRAWAL    $200.00 -> APPLIED
+ 
+FINAL BALANCES:
+  1001  ALICE ANDERSON          $200.50
+  1002  BOB BAKER                $50.00
+  1003  CAROL CHEN              $700.00
+  1004  DANA DIAZ                $10.00
+===========================================
