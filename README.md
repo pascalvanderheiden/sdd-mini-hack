@@ -19,7 +19,9 @@ Pick **one** of the four scenarios below, watch the short video, and follow the 
 
 - **VS Code** with **GitHub Copilot** + **Copilot Chat** signed in.
 - **Node.js 20.19+** (`node --version`).
-- **Playwright MCP** is preconfigured for VS Code (`.vscode/mcp.json`) and Copilot CLI (`.mcp.json`). It runs on demand via `npx @playwright/mcp@latest`.
+- **Playwright MCP** is preconfigured for VS Code (`.vscode/mcp.json`) and Copilot CLI (`.mcp.json`). It runs on demand via `npx @playwright/mcp@latest`. You can also use **Playwright CLI** as a backup (`npm install -g playwright && npx playwright install chromium`).
+
+For a complete scenario-by-scenario prerequisites matrix (including hackathon-only extras), see [docs/prerequisites.md](docs/prerequisites.md).
 
 ```bash
 git clone https://github.com/pascalvanderheiden/sdd-mini-hack.git

@@ -7,6 +7,8 @@ Run a small COBOL banking program, then use **Spec Kit** to specify, plan, task,
 
 ## Prereqs
 
+See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.md).
+
 - VS Code with GitHub Copilot + Copilot Chat signed in.
 - Node.js 20.19+.
 - **GnuCOBOL** (`cobc -V`):

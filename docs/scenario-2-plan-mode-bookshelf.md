@@ -7,6 +7,8 @@ Add a feature to the included **Bookshelf** sample app and validate the result w
 
 ## Prereqs
 
+See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.md).
+
 - VS Code with GitHub Copilot + Copilot Chat signed in.
 - Node.js 20.19+.
 

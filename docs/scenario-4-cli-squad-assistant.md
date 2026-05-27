@@ -7,6 +7,8 @@ Use the **Copilot CLI** with the **Squad** agent. Add a Squad team member that o
 
 ## Prereqs
 
+See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.md).
+
 - GitHub Copilot CLI installed and signed in (`copilot --help`).
 - Node.js 20.19+.
 - Squad: `npm install -g @bradygaster/squad-cli` (`squad doctor`).
@@ -54,13 +56,9 @@ In the Copilot CLI session, send:
 
 ```text
 I'm starting a small personal assistant app called DayDesk.
+Set up a small Squad team for this project.
 
-Set up a small Squad team for this project:
-- a product/spec lead
-- a frontend implementer
-- a validation/tester role
-
-Then add a fourth specialist member named "Specs" who owns OpenSpec and is the only member allowed to run /opsx commands.
+Then add a specialized member who manages OpenSpec proposals. 
 
 Show me the proposed roster and wait for my approval.
 ```
@@ -70,7 +68,7 @@ Approve the roster.
 ## Step 5 — Have the Specs member create the proposal
 
 ```text
-Specs: please create an OpenSpec proposal for DayDesk.
+Squad, please create an OpenSpec proposal for DayDesk.
 
 Scope:
 - Capture short notes (add, list, delete).
@@ -80,7 +78,7 @@ Scope:
 - Browser app, vanilla HTML/CSS/JS, no framework, single Node http server (npm start).
 - No external APIs, secrets, or auth.
 
-Use /opsx:propose. Include acceptance criteria and validation steps. Pause for my review before applying.
+Include acceptance criteria and validation steps. Pause for my review before applying.
 ```
 
 When the proposal is ready, review the change folder under `openspec/changes/`. Ask Specs to simplify if needed.
@@ -88,14 +86,25 @@ When the proposal is ready, review the change folder under `openspec/changes/`. 
 ## Step 6 — Apply with the Squad executing it
 
 ```text
-Specs: run /opsx:apply.
-Frontend implementer: implement the tasks in small steps.
-Validation lead: after each step, list the manual checks I should run and update a CHECKLIST.md.
-
+Squad, please apply the approved OpenSpec proposal and implement the app.
 Coordinate the handoffs and report back after each task.
 ```
 
-## Step 7 — Run and validate
+## Step 7 — Test with Playwright
+
+In the Copilot CLI session, ask Squad to run a Playwright validation pass before final sign-off:
+
+```text
+Squad, run Playwright tests against the running app and report pass/fail for core flows:
+- add note
+- delete note
+- add reminder
+- today view filtering
+```
+
+If MCP is unavailable, run Playwright CLI as backup (`npx playwright test`) and share results.
+
+## Step 8 — Run and validate
 
 Open a second terminal:
 
@@ -109,8 +118,7 @@ Open the printed URL and walk through the validation lead's checklist.
 Back in the Copilot CLI:
 
 ```text
-Specs: archive the change with /opsx:archive once validation passes.
-Squad lead: write a short SUMMARY.md describing the architecture, decisions, and next steps.
+Squad, archive the change once validation passes and sync all specs and write a short SUMMARY.md describing the architecture, decisions, and next steps.
 ```
 
 ## Optional stretch goals

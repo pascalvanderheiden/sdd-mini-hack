@@ -7,6 +7,8 @@ Build a tiny todo app from a spec, then validate it with Playwright MCP.
 
 ## Prereqs
 
+See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.md).
+
 - VS Code with GitHub Copilot + Copilot Chat signed in.
 - Node.js 20.19+.
 - OpenSpec: `npm install -g @fission-ai/openspec@latest`.
@@ -65,7 +67,7 @@ Review the generated `openspec/changes/<change-id>/` files: `proposal.md`, `task
 In Copilot Chat:
 
 ```text
-/openspec-apply
+/openspec-apply-change
 ```
 
 Approve when asked. Copilot will create the project files and tasks.
