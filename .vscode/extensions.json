@@ -3,7 +3,8 @@
     "GitHub.copilot",
     "GitHub.copilot-chat",
     "ms-playwright.playwright",
-    "broadcommfd.cobol-language-support"
+    "broadcommfd.cobol-language-support",
+    "bierner.markdown-mermaid"
   ]
 }
 

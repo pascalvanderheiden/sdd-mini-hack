@@ -144,3 +144,11 @@ Two small skills are included under `.github/skills/`. Copilot can use them when
 ├── media/videos/         # 4 demo videos
 └── scripts/              # Verification helper
 ```
+
+---
+
+## Bonus (optional, not required for this lab)
+
+Want to design your own reusable agentic template? See [docs/meta-agentic-template.md](docs/meta-agentic-template.md) for a simple meta-cognition flow covering prompts, skills, agents, and MCP servers.
+
+It works really well to combine your agentic template with spec-driven development: once the template knows *how to work*, layer SDD on top so the agent also *works from a spec* — making your solutions more sophisticated and reviewable.
