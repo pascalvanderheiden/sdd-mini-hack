@@ -94,7 +94,7 @@ The team needs:
 - One extra squad member for every speckit custom agent definition present in the .github/agents folder.
 - The squad lead orchestrates the speckit method, invoking each speckit squad member at the right time.
 - The member that follows the speckit.implement.agent.md directive orchestrates the core team to do the development.
-- One extra squad member to manage skills, using find-skills or skill-creator, to give the team the capabilities they need to execute this task before they implement.
+- One extra squad member to manage skills, using find-skills or skill-creator. The Skills Manager searches for the skills the team needs right after the constitution and before the spec, so the capabilities are in place before specifying.
 
 Keep all Spec Kit artifacts in the standard location under specs/<feature-name>/ (not inside .squad) so the work stays trackable.
 
@@ -126,7 +126,7 @@ Requirements:
 - Build country_metrics by joining the two on iso_code + year (CO₂ totals/per-capita alongside population).
 - Idempotent loads (safe to re-run), use bulk COPY/insert, and connect via postgresql://etl:etl_workshop@localhost:5432/climate_db.
 
-Create the constitution, the spec, the plan, and the tasks, and have the Skills Manager find the skills we need (e.g. Postgres loading, CSV/ETL, data validation). Write all Spec Kit artifacts to the standard Spec Kit location under specs/<feature-name>/ (not inside .squad).
+Run the phases in order: first the constitution, then have the Skills Manager find the skills we need (e.g. Postgres loading, CSV/ETL, data validation), then the spec, the plan, and the tasks. Write all Spec Kit artifacts to the standard Spec Kit location under specs/<feature-name>/ (not inside .squad).
 ```
 
 The Lead distributes to the phase members. You get **constitution, spec, plan, tasks**, and a skills list. Review before continuing.
