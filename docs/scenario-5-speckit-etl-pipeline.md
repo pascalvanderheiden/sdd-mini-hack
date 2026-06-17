@@ -3,7 +3,7 @@
 Execute the **complete Spec Kit lifecycle** orchestrated by **Squad**, landing two public climate datasets into a local PostgreSQL container.
 
 **Time:** ~60 minutes  
-**Tooling:** Squad (Copilot CLI) + Spec Kit + Docker + Python 3.12+ + PostgreSQL
+**Tooling:** Squad (VS Code · Squad UI) + Spec Kit + Docker + Python 3.12+ + PostgreSQL
 
 ## Prereqs
 
