@@ -146,9 +146,11 @@ Once specs are validated, send:
 
 ```
 Specs look good. Lead, kick off the implementation in one go following the Spec Kit implement pattern, distributing the tasks to the core team. Build the pipeline and load both datasets into PostgreSQL.
+
+As you complete each task, mark it done in specs/<feature-name>/tasks.md. When implementation finishes, write a short test report (tests run, pass/fail counts, row counts loaded per table) to specs/<feature-name>/test-report.md.
 ```
 
-The Implement-phase member orchestrates the core team (database setup, pipeline code, tests) to build `examples/etl-climate-pipeline/pipeline.py` and load the data.
+The Implement-phase member orchestrates the core team (database setup, pipeline code, tests) to build `examples/etl-climate-pipeline/pipeline.py`, load the data, **check off the tasks in `tasks.md`**, and produce a short **`test-report.md`**.
 
 ## Step 8 — Validate the pipeline
 
