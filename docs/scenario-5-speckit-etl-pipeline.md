@@ -96,7 +96,7 @@ The team needs:
 - The member that follows the speckit.implement.agent.md directive orchestrates the core team to do the development.
 - One extra squad member to manage skills, using find-skills or skill-creator. The Skills Manager searches for the skills the team needs right after the constitution and before the spec, so the capabilities are in place before specifying.
 
-Keep all Spec Kit artifacts in the standard location under specs/<feature-name>/ (not inside .squad) so the work stays trackable.
+Keep all Spec Kit artifacts in the standard location under specs/<feature-name>/ (not inside .squad) so the work stays trackable. Use a Matrix theme for the team's cast names.
 
 The use case: combine two public open datasets and land them in the local PostgreSQL container.
 ```
