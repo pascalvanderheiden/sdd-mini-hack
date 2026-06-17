@@ -3,16 +3,16 @@
 Execute the **complete Spec Kit lifecycle** orchestrated by **Squad**, landing two public climate datasets into a local PostgreSQL container.
 
 **Time:** ~60 minutes  
-**Tooling:** VS Code + GitHub Copilot (Squad custom agent) + Spec Kit + Docker + Python 3.12+ + PostgreSQL
+**Tooling:** GitHub Copilot CLI (Squad custom agent) + Spec Kit + Docker + Python 3.12+ + PostgreSQL
 
 ## Prereqs
 
 See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
-- VS Code + GitHub Copilot + Copilot Chat signed in.
+- GitHub Copilot CLI signed in: `brew install --cask copilot-cli` (macOS) or `npm install -g @github/copilot@latest`.
 - Docker — **Docker Desktop** (most users) or **colima** (macOS CLI alternative: `brew install colima docker`, then `colima start`).
 - Python 3.12+ & uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` & `specify check`
-- Optional: Spec Kit companion extension (VS Code), psql client.
+- Optional: psql client.
 - **Squad CLI**: `npm install -g @bradygaster/squad-cli`
 
 ## Step 0 — Test the source endpoints first
@@ -48,9 +48,13 @@ pg_isready -h localhost -U etl -d climate_db
 
 Connection string: `postgresql://etl:etl_workshop@localhost:5432/climate_db`
 
-## Step 2 — Open the folder and initialize Spec Kit
+## Step 2 — Initialize Spec Kit
 
-Open **only the `examples/etl-climate-pipeline` folder** in VS Code (File → Open Folder…) so Spec Kit and the Squad stay scoped to this example, isolated from the repo-root squad.
+Open a terminal and `cd` into the example folder (if you aren't already there from Step 1):
+
+```bash
+cd examples/etl-climate-pipeline
+```
 
 Initialize Spec Kit **first** — it creates the `/speckit.*` commands and the speckit custom agent definitions in `.github/agents` that the Squad needs to reference:
 
@@ -73,13 +77,14 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator
 
 ## Step 4 — Initialize Squad and hire the team
 
-Now scaffold a **folder-scoped** Squad:
+Scaffold a **folder-scoped** Squad, then start the GitHub Copilot CLI with the Squad agent:
 
 ```bash
 squad init
+copilot --agent squad --yolo
 ```
 
-In VS Code, open **Copilot Chat** and select the **Squad** custom agent from the agent dropdown (defined in `.github/agents/squad.agent.md`). Send one prompt:
+In the Copilot CLI session, send one prompt to hire the team:
 
 ```
 Set up a Squad to build a greenfield ETL pipeline with Spec Kit, scoped to this folder. We build the pipeline green-field: spec the contract, then the agents build the pipeline.
@@ -90,6 +95,8 @@ The team needs:
 - The squad lead orchestrates the speckit method, invoking each speckit squad member at the right time.
 - The member that follows the speckit.implement.agent.md directive orchestrates the core team to do the development.
 - One extra squad member to manage skills, using find-skills or skill-creator, to give the team the capabilities they need to execute this task before they implement.
+
+Keep all Spec Kit artifacts in the standard location under specs/<feature-name>/ (not inside .squad) so the work stays trackable.
 
 The use case: combine two public open datasets and land them in the local PostgreSQL container.
 ```
@@ -119,7 +126,7 @@ Requirements:
 - Build country_metrics by joining the two on iso_code + year (CO₂ totals/per-capita alongside population).
 - Idempotent loads (safe to re-run), use bulk COPY/insert, and connect via postgresql://etl:etl_workshop@localhost:5432/climate_db.
 
-Create the constitution, the spec, the plan, and the tasks, and have the Skills Manager find the skills we need (e.g. Postgres loading, CSV/ETL, data validation).
+Create the constitution, the spec, the plan, and the tasks, and have the Skills Manager find the skills we need (e.g. Postgres loading, CSV/ETL, data validation). Write all Spec Kit artifacts to the standard Spec Kit location under specs/<feature-name>/ (not inside .squad).
 ```
 
 The Lead distributes to the phase members. You get **constitution, spec, plan, tasks**, and a skills list. Review before continuing.

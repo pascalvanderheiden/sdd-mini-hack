@@ -7,7 +7,7 @@ See the full scenario guide: [../../docs/scenario-5-speckit-etl-pipeline.md](../
 ## Quick Start
 
 1. **Follow the scenario guide** step-by-step. You'll:
-   - Switch to the Squad custom agent in Copilot Chat and hire your team
+   - Start the Squad agent in the GitHub Copilot CLI (`copilot --agent squad --yolo`) and hire your team
    - Run the Spec Kit lifecycle via two prompts: (1) spec phase, (2) implement phase
    - Build `pipeline.py` and load both datasets into PostgreSQL
 
