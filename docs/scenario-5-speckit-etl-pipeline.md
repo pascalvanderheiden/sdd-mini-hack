@@ -154,14 +154,20 @@ The Implement-phase member orchestrates the core team (database setup, pipeline 
 
 ## Step 8 — Validate the pipeline
 
-Run the pipeline (if not already done):
+You can validate two ways: ask the Squad in the Copilot CLI session, or run the commands yourself.
+
+**Run the pipeline** (if not already done):
+
+> Prompt: `Lead, run the pipeline and confirm both datasets loaded into PostgreSQL.`
 
 ```bash
 docker-compose ps
 python pipeline.py
 ```
 
-Verify in psql:
+**Check row counts and the join:**
+
+> Prompt: `Show me the row counts for each climate table and a few sample rows from country_metrics.`
 
 ```bash
 psql -h localhost -U etl -d climate_db -c "SELECT count(*) FROM climate.co2_emissions;"
@@ -169,7 +175,22 @@ psql -h localhost -U etl -d climate_db -c "SELECT count(*) FROM climate.populati
 psql -h localhost -U etl -d climate_db -c "SELECT iso_code, country_name, year, co2_mt FROM climate.country_metrics LIMIT 3;"
 ```
 
-Both tables populated? Validation complete.
+**Inspect a trend — Netherlands CO₂ increase per year:**
+
+> Prompt: `Query country_metrics for the Netherlands and show the year-over-year CO₂ increase.`
+
+```bash
+psql -h localhost -U etl -d climate_db -c "
+SELECT year, co2_mt,
+       ROUND((co2_mt - LAG(co2_mt) OVER (ORDER BY year))::numeric, 3) AS increase_mt
+FROM climate.country_metrics
+WHERE iso_code = 'NLD'
+ORDER BY year;"
+```
+
+> **Note:** if the container is published on a different host port (e.g. `5433`), add `-p 5433` to the `psql` commands or use `docker exec <postgres-container> psql -U etl -d climate_db -c "…"`.
+
+Both tables populated and the trend query returns rows? Validation complete.
 
 ## Troubleshooting
 
