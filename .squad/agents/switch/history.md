@@ -37,3 +37,33 @@
 - Documentation consistency check must cover: tooling lists, time estimates, folder paths, internal link resolution, and tone/structure match against peer scenarios. Use prior scenarios (3 & 4) as templates.
 
 **Deliverable:** `.squad/decisions/inbox/switch-scenario5-validation.md` with prioritized fix list routed to Mouse.
+
+## 2026-06-17 — Scenario 5 live infrastructure test (colima runtime)
+
+**Task:** Run end-to-end infrastructure test of Scenario 5 scaffold using colima as Docker daemon. Verify Docker runtime, source endpoints, DB schema, sanity operations, and clean teardown.
+
+**Approach:**
+- Pre-flight: verified colima installed, started it with `--cpu 2 --memory 4` (77s cold start).
+- Step 1 (Docker runtime): `docker info` to confirm daemon responsive post-colima start.
+- Step 2 (Source endpoints): `curl -sI` + `curl -s | head -1` on both OWID CO₂ and Datahub Population CSVs. Verified HTTP 200 + expected headers (`country,year,iso_code,...` and `Country Name,Country Code,Year,Value`).
+- Step 3 (Target DB): `docker-compose up -d` to pull postgres:16-alpine image and start container. Polled `pg_isready -U etl -d climate_db` until healthy (11s).
+- Step 4 (Schema verification): `\dt climate.*` confirmed 3 tables (co2_emissions, population, country_metrics). `\di climate.*` confirmed 6 indexes (3 primary keys + 3 custom: idx_co2_iso_year, idx_pop_iso_year, idx_metrics_iso_year). Matched init.sql exactly.
+- Step 5 (Sanity test): INSERT + SELECT on climate.co2_emissions. Returned count=1. Confirmed DB writable and queryable.
+- Step 6 (Teardown): `docker-compose down -v`. Verified container removed, volume deleted, network removed, `docker-compose ps` empty. Confirmed data/ directory still clean (only .gitkeep). Left colima running (user will reuse it).
+
+**Findings:**
+- PASS all steps. No blockers.
+- Minor issue: docker-compose.yml:1 has obsolete `version: '3.8'` field. Generates warning on every command. Non-functional but noisy. Recommended removal per Compose Specification.
+- Total test duration: ~4 minutes (including colima cold start and image pull).
+- Postgres became healthy in 11 seconds post-container start.
+- init.sql auto-executed correctly (schema matches specification).
+
+**Learning:**
+- colima start can take 60–90s on first run (QEMU VM boot + Docker daemon init). When writing test scripts, allow ≥120s initial_wait for `colima start`.
+- docker-compose up with image pull adds ~30–60s. For live tests, separate "pull" step from "start" step to isolate failures.
+- pg_isready polling is more reliable than fixed sleeps. Use loop with 10–12 attempts @ 3s interval to handle varying startup speeds.
+- Always verify teardown with `docker-compose ps` and volume inspection — `docker-compose down -v` can silently fail to remove volumes if containers are unhealthy.
+- Obsolete docker-compose.yml `version` field is common in legacy examples. Flag it in docs/tests but treat as cosmetic, not blocking.
+- For workshop delivery, pre-pull the postgres:16-alpine image to save attendees 30–60s of wait time during hands-on exercises.
+
+**Deliverable:** `.squad/decisions/inbox/switch-scenario5-livetest.md` with PASS report and minor fix recommendation (remove version field).

@@ -90,12 +90,31 @@ This opens the pre-scaffolded example folder. **Important:** The dedicated Squad
 
 Stand up and verify PostgreSQL before writing any pipeline code.
 
+### Start Colima (macOS only)
+
+On **macOS**, containers run via **colima** as the Docker runtime. Start it before running docker compose:
+
+```bash
+colima start
+```
+
+Verify Docker is connected:
+
+```bash
+docker info
+```
+
+If you see "Cannot connect to the Docker daemon," run `colima start` again.
+
+> Windows users: Docker Desktop starts automatically; no colima needed.
+
+### Set up PostgreSQL
+
+### Set up PostgreSQL
+
 The `examples/etl-climate-pipeline/` folder already includes `docker-compose.yml` and `init.sql`. Review them:
 
-**`docker-compose.yml` (already in folder):**
-
 ```yaml
-version: '3.8'
 services:
   postgres:
     image: postgres:16-alpine
@@ -195,7 +214,107 @@ When prompted, enter password: `etl_workshop`
 
 > Database running and healthy? Move to Step 3.
 
-## Step 3 — Meet your Squad
+## Step 3 — Create your own Squad
+
+**YOU will create the dedicated Squad for this scenario.** This is a learning objective: building and prompting for a precisely scoped team is part of the Spec Kit discipline.
+
+### Install Squad CLI
+
+In your terminal (anywhere):
+
+```bash
+npm install -g @bradygaster/squad-cli
+squad doctor
+```
+
+Verify output shows Squad CLI version and Node.js OK.
+
+### Initialize Squad in the example folder
+
+**Navigate to the example folder and initialize Squad THERE:**
+
+```bash
+cd examples/etl-climate-pipeline
+squad init
+```
+
+**Important:** Running `squad init` *inside this folder* creates a `.squad/` directory **local to this example**. This keeps it isolated from the repo-root `.squad/` (which is the meta team for extending the SDD hacks). The two squads never conflict because they are in separate folders.
+
+Verify:
+
+```bash
+ls -la .squad/
+```
+
+### Prompt for a crystal-clear team
+
+Open **VS Code** in this folder:
+
+```bash
+code .
+```
+
+Open the **Squad UI extension** in VS Code. This launches the Squad coordinator interface where you'll hire the team.
+
+#### Prompt for a crystal-clear team
+
+The precision of your prompt determines the clarity of the hired team. Follow these guidelines:
+
+**State the goal:** Describe the scenario — a greenfield ETL pipeline with the full Spec Kit lifecycle.
+
+**Name the roles explicitly:** List roles by name and count. Avoid vague requests like "set up a team"; instead name the phases and the core team members.
+
+**Ask for one member per Spec Kit phase + supporting roles:** Constitution, Specify, Clarify, Plan, Tasks, Analyze, Checklist, Implement, Validation — PLUS a Skills Manager (for find-skills provisioning) and a core build team (pipeline engineer, database/tooling engineer, tester).
+
+**Clarify orchestration:** Ask the Lead to sequence the phases in order. Ask the Implement-phase member to orchestrate the core build team during implementation.
+
+**Request isolation:** Remind the coordinator this squad is scoped to this folder only.
+
+**Review and refine:** Ask to see the proposed roster before confirming.
+
+#### Example prompt (copy and adapt):
+
+```
+Set up a dedicated Squad for this folder to build a greenfield ETL pipeline with Spec Kit.
+
+I want:
+- A Lead (Neo) who orchestrates the full Spec Kit lifecycle in order.
+- One member per Spec Kit phase:
+  - Constitution (Morpheus): principles & guardrails
+  - Specify + Clarify (Oracle): data model & requirements
+  - Plan (Niobe): technical architecture
+  - Tasks + Analyze (Dozer): task breakdown & dependency analysis
+  - Checklist (Cypher): quality gate
+  - Skills provisioning (Link): find-skills and capability provisioning
+  - Implement (Seraph): orchestrates the core build team (Tank, Trinity, Switch)
+  - Validation (Switch): end-to-end tests and data verification
+- A core build team under Seraph:
+  - Tank: database setup and connection handling
+  - Trinity: pipeline logic (download, parse, join, load)
+  - Switch: smoke tests and end-to-end validation
+- A Skills Manager (Link) who provisions postgres-etl and dataset-ingestion capabilities via find-skills before implementation begins.
+
+The Implement-phase member (Seraph) should orchestrate Tank/Trinity/Switch.
+
+Keep this squad scoped to this folder only (isolated from the repo-root squad).
+
+Show me the proposed roster and wait for my approval before confirming.
+```
+
+#### Tips for clear prompting
+
+- **Be explicit about roles and counts:** Name each role and how many members. Avoid generic requests.
+- **Reference the methodology:** Say "Spec Kit" by name and list the phases in order.
+- **State the isolation requirement:** Tell the coordinator this squad stays in this folder.
+- **Iterate on the roster:** Ask to see the proposed team before confirming. If the roster is unclear or missing a role, refine your prompt and try again.
+
+### Confirm the roster
+
+Once the Squad UI shows the proposed team and you approve it, the squad is **hired and active** in `.squad/`.
+
+> Squad initialized and roster confirmed? Move to Step 4.
+
+## Step 4 — Meet your Squad
 
 The Squad team orchestrates the full Spec Kit lifecycle. Each member owns one phase, producing the artifact that mirrors the Spec Kit prompt.
 
@@ -220,7 +339,7 @@ The Squad team orchestrates the full Spec Kit lifecycle. Each member owns one ph
 - **Cypher's checklist is a hard gate** — no implementation starts until it passes.
 - **Link must provision skills BEFORE Seraph begins implementation.**
 
-## Step 4 — Initialize Spec Kit
+## Step 5 — Initialize Spec Kit
 
 From `examples/etl-climate-pipeline`:
 
@@ -230,7 +349,7 @@ specify init --here --ai copilot
 
 Accept the defaults. This creates `.specify/` and registers `/speckit.*` slash commands.
 
-## Step 5 — Constitution (Morpheus)
+## Step 6 — Constitution (Morpheus)
 
 In **Copilot Chat → Agent mode**, send:
 
@@ -250,7 +369,7 @@ Principles for the climate data ETL:
 
 **Morpheus produces:** `constitution` artifact in `.specify/`.
 
-## Step 6 — Specify + Clarify (Oracle)
+## Step 7 — Specify + Clarify (Oracle)
 
 In Copilot Chat:
 
@@ -281,7 +400,7 @@ Address open questions:
 
 **Oracle produces:** `specification` and `clarifications` artifacts.
 
-## Step 7 — Plan (Niobe)
+## Step 8 — Plan (Niobe)
 
 In Copilot Chat:
 
@@ -301,7 +420,7 @@ Given the spec:
 
 **Niobe produces:** `plan` artifact.
 
-## Step 8 — Tasks + Analyze (Dozer)
+## Step 9 — Tasks + Analyze (Dozer)
 
 In Copilot Chat:
 
@@ -332,7 +451,7 @@ Then:
 
 **Dozer produces:** `tasks` and `analysis` artifacts.
 
-## Step 9 — Checklist (Cypher)
+## Step 10 — Checklist (Cypher)
 
 In Copilot Chat:
 
@@ -354,7 +473,7 @@ Verify against plan:
 
 **Cypher produces:** `checklist` artifact. **All items must pass before proceeding.**
 
-## Step 10 — Skills Provisioning (Link)
+## Step 11 — Skills Provisioning (Link)
 
 In Copilot Chat:
 
@@ -372,7 +491,7 @@ I'll use skill-creator to scaffold both, then Seraph will reference them during 
 
 **Link produces:** find-skills installed, `postgres-etl` and `dataset-ingestion` skills registered.
 
-## Step 11 — Implement (Seraph orchestrates Tank/Trinity/Switch)
+## Step 12 — Implement (Seraph orchestrates Tank/Trinity/Switch)
 
 In Copilot Chat:
 
@@ -406,7 +525,7 @@ python pipeline.py
 
 Expected output: row counts for each table and validation queries.
 
-## Step 12 — Validation (Switch)
+## Step 13 — Validation (Switch)
 
 In Copilot Chat:
 
@@ -446,7 +565,7 @@ LIMIT 10;
 
 All tables populated and joins working? **Validation complete.**
 
-## Step 13 — Troubleshooting
+## Step 14 — Troubleshooting
 
 | Issue | Solution |
 |-------|----------|

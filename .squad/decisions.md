@@ -96,6 +96,71 @@ Refined `docs/scenario-5-speckit-etl-pipeline.md` and `docs/prerequisites.md` to
 
 **Verified:** All edits non-breaking; docs remain consistent across scenarios.
 
+---
+
+### 2026-06-17T08:42:00Z: Scenario 5 — learners create their own squad; colima for containers
+
+**By:** Pascal van der Heiden (via Copilot)  
+**Status:** ADOPTED
+
+**Directive:** Do NOT ship a pre-made `.squad/` in `examples/etl-climate-pipeline/`. Creating the dedicated, folder-scoped squad is PART OF THE EXERCISE: learner runs `squad init` in the example folder via terminal (isolated from repo-root squad), then prompts Squad coordinator via Squad UI in VS Code to hire a crystal-clear team for full Spec Kit lifecycle + core build team.
+
+**Requirements:**
+- Instructions MUST include explicit prompting guidance on phrasing the request for unambiguous team composition
+- Containers run with colima (`colima start`) as Docker runtime (macOS native)
+- Squad creation and precise prompting is a learning objective, not pre-baked
+
+---
+
+### 2026-06-17T10:44:00Z: Scenario 5 documentation updated — self-create squad + colima + prompting guidance
+
+**By:** Mouse (Technical Writer / DevRel)  
+**Status:** COMPLETE
+
+Implemented self-create squad pattern for Scenario 5 (ETL Pipeline):
+
+**Changes:**
+1. **NEW STEP 3 "Create your own Squad"** — Learners create folder-scoped squad via `squad init` inside example folder, kept isolated from repo-root squad
+2. **"Prompt for a crystal-clear team" subsection** — Extensive guidance on phrasing hire request:
+   - State goal (greenfield ETL, full Spec Kit lifecycle, two public datasets → PostgreSQL)
+   - Name roles explicitly (one per Spec Kit phase + Skills Manager + core build team)
+   - Ask Lead to orchestrate phases, Implement member to orchestrate core team
+   - Request isolation (folder-scoped)
+   - Review and refine proposed roster before confirming
+3. **Concrete example prompt** — Complete, adaptable template for exact team composition
+4. **"Tips for clear prompting" list** — Explicit role naming, methodology reference, isolation, roster iteration
+5. **Colima documentation** — Added to prerequisites.md and Step 2 (DB setup):
+   - macOS: `brew install colima docker`, then `colima start` before `docker compose`
+   - Troubleshooting: if `docker info` fails, run `colima start` again
+6. **Updated examples/etl-climate-pipeline/README.md** — Removed pre-made squad claim; learners create squad during Step 3
+7. **Renumbered all steps** — Step 3→4 (Meet Squad), Step 4→5 (Init Spec Kit), etc. through Step 14 (Troubleshooting)
+
+**Verification:** All edits to scenario-5, prerequisites, example README, history log. No breaking changes; only insertions and renumbering.
+
+---
+
+### 2026-06-17T10:47:00Z: Scenario 5 Live Infrastructure Test — PASS
+
+**By:** Switch (QA / Infrastructure)  
+**Status:** COMPLETE
+
+Full end-to-end live test: colima startup → docker compose → schema verification → sanity test → teardown.
+
+**Test Results:**
+- **Docker Runtime:** colima started successfully (~77s). Docker daemon responsive.
+- **Source Endpoints:** Both dataset URLs return HTTP 200 (CO2 + Population CSV headers verified)
+- **Target DB:** postgres:16-alpine container healthy within 11 seconds
+- **Schema Verification:** All 3 tables created (co2_emissions, population, country_metrics). All 6 indexes present (3 primary keys + 3 composite on iso_code, year)
+- **Sanity Test:** Insert and select operations functional. Database writable and queryable.
+- **Teardown:** All containers, volumes, networks removed cleanly. Data directory clean (only .gitkeep)
+- **Total Test Duration:** ~4 minutes (including colima cold start and image pull)
+
+**Minor Finding:** Obsolete `version: '3.8'` in docker-compose.yml generates warning on every command. **Recommendation:** Remove line 1 per [Compose Specification](https://docs.docker.com/compose/compose-file/). **Action:** Removed by Coordinator.
+
+**Compliance:** All 8 scenario claims verified (3 tables, 3 indexes, image, init script, healthcheck, port, volume, network).
+
+**Status:** Production-ready for workshop delivery.
+
 ## Governance
 
 - All meaningful changes require team consensus
