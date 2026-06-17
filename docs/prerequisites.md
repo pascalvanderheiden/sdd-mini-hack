@@ -53,7 +53,7 @@
 | Python 3.12+ | `brew install python@3.12` | `winget install -e --id Python.Python.3.12` |
 | uv | `curl -LsSf https://astral.sh/uv/install.sh \| sh` | `powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://astral.sh/uv/install.ps1 \| iex"` |
 | Spec Kit CLI | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` |
-| Copilot CLI | `brew install --cask copilot-cli` | `npm install -g @github/copilot@latest` |
-| Squad CLI | `npm install -g @bradygaster/squad-cli` | `npm install -g @bradygaster/squad-cli` |
+| Squad UI (VS Code extension) | Search VS Code Extensions for **Squad UI**: https://marketplace.visualstudio.com/search?term=squad&target=VSCode | Search VS Code Extensions for **Squad UI**: https://marketplace.visualstudio.com/search?term=squad&target=VSCode |
+| Spec Kit companion (VS Code extension) | Search VS Code Extensions for **Spec Kit** companion: https://marketplace.visualstudio.com/search?term=spec%20kit&target=VSCode | Search VS Code Extensions for **Spec Kit** companion: https://marketplace.visualstudio.com/search?term=spec%20kit&target=VSCode |
 | psql client (optional) | `brew install postgresql@16` | `winget install -e --id PostgreSQL.PostgreSQL` |
 

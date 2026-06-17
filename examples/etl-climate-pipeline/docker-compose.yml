@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: etl
+      POSTGRES_PASSWORD: etl_workshop
+      POSTGRES_DB: climate_db
+      POSTGRES_INITDB_ARGS: "-c max_connections=50"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etl"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - climate_net
+
+volumes:
+  pgdata:
+
+networks:
+  climate_net:
+    driver: bridge

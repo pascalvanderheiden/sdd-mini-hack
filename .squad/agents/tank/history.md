@@ -11,3 +11,4 @@
 <!-- Append new learnings below. Each entry is something lasting about the project. -->
 - Repo structure: scenarios in `docs/scenario-N-*.md`, sample apps in `examples/<app>/`, skills in `.github/skills/`, authoring guides in `.github/instructions/*.instructions.md`, MCP config in `.mcp.json` + `.vscode/mcp.json`, verification in `scripts/verify-workshop.sh`.
 - User directive: use Speckit workflow only; do not use Superpowers skills.
+- **2026-06-17:** Scenario 5 (ETL Climate Pipeline) uses a DEDICATED folder-scoped Squad at `examples/etl-climate-pipeline/.squad/`, completely isolated from the repo-root `.squad/` (which is the meta team for extending the SDD hacks). The two squads MUST NOT conflict. Learners open `examples/etl-climate-pipeline` in VS Code so the dedicated squad is active via SquadUI extension.

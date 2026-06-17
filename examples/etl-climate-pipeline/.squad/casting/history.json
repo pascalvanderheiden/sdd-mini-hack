@@ -1,0 +1,30 @@
+{
+  "universe_usage_history": [
+    {
+      "universe": "The Matrix",
+      "assigned_at": "2026-06-17T08:30:00Z",
+      "assignment_id": "asg-2026-06-17-etl-pipeline-01"
+    }
+  ],
+  "assignment_cast_snapshots": {
+    "asg-2026-06-17-etl-pipeline-01": {
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "reason": "Dedicated Scenario 5 build squad for ETL Climate Pipeline. The Matrix universe resonates with spec-driven development, loaded programs/skills, and building realities from specifications.",
+      "cast": {
+        "neo": "Neo",
+        "morpheus": "Morpheus",
+        "oracle": "Oracle",
+        "niobe": "Niobe",
+        "dozer": "Dozer",
+        "cypher": "Cypher",
+        "link": "Link",
+        "seraph": "Seraph",
+        "trinity": "Trinity",
+        "tank": "Tank",
+        "switch": "Switch",
+        "scribe": "Scribe"
+      }
+    }
+  }
+}

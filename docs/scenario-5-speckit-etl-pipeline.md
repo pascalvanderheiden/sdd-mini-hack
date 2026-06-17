@@ -10,12 +10,18 @@ Execute the **complete Spec Kit lifecycle** orchestrated by **Squad**, landing t
 See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.md).
 
 - VS Code with GitHub Copilot + Copilot Chat signed in.
-- GitHub Copilot CLI installed (`copilot --help`).
-- Squad: `npm install -g @bradygaster/squad-cli` (`squad doctor`).
+- **Squad UI** (VS Code extension):
+  - In VS Code, open the Extensions view (**Cmd/Ctrl+Shift+X**) and search for **Squad UI**.
+  - Install the Squad UI extension from the marketplace: https://marketplace.visualstudio.com/search?term=squad&target=VSCode
+  - Confirm the publisher in the marketplace before installing.
+- **Spec Kit companion** (VS Code extension):
+  - In the Extensions view, search for **Spec Kit** and install the companion extension.
+  - Marketplace search: https://marketplace.visualstudio.com/search?term=spec%20kit&target=VSCode
+  - Confirm the publisher in the marketplace before installing.
 - **Docker** with docker compose (`docker --version`, `docker compose version`).
 - **Python 3.12+** and **uv**:
   - `curl -LsSf https://astral.sh/uv/install.sh | sh`
-- **Spec Kit**:
+- **Spec Kit CLI**:
   - `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git`
   - `specify check`
 - **psql client** (optional but recommended for validation):
@@ -70,20 +76,23 @@ Expected columns: `Country Name, Country Code, Year, Value`
 
 > Both endpoints return 200 with CSV rows? Proceed to Step 1. Otherwise, fix network access or use a local copy of the data.
 
-## Step 1 — Set up the target database
+## Step 1 — Open the example folder in VS Code
+
+```bash
+code examples/etl-climate-pipeline
+```
+
+This opens the pre-scaffolded example folder. **Important:** The dedicated Squad team in `examples/etl-climate-pipeline/.squad/` is **separate from the repo-root squad** — the two never conflict. The folder-scoped squad orchestrates only this ETL pipeline scenario.
+
+## Step 2 — Set up the target database
 
 **Owner: 🔧 Tank** (Phase 0 — Setup)
 
 Stand up and verify PostgreSQL before writing any pipeline code.
 
-**Create the folder:**
+The `examples/etl-climate-pipeline/` folder already includes `docker-compose.yml` and `init.sql`. Review them:
 
-```bash
-mkdir -p examples/etl-climate-pipeline
-cd examples/etl-climate-pipeline
-```
-
-**Create `docker-compose.yml`:**
+**`docker-compose.yml` (already in folder):**
 
 ```yaml
 version: '3.8'
@@ -116,7 +125,7 @@ networks:
     driver: bridge
 ```
 
-**Create `init.sql` (target schema + 3 tables):**
+**`init.sql` (already in folder — target schema + 3 tables):**
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS climate;
@@ -184,9 +193,9 @@ psql -h localhost -U etl -d climate_db -c "SELECT version();"
 
 When prompted, enter password: `etl_workshop`
 
-> Database running and healthy? Move to Step 2.
+> Database running and healthy? Move to Step 3.
 
-## Step 2 — Meet your Squad
+## Step 3 — Meet your Squad
 
 The Squad team orchestrates the full Spec Kit lifecycle. Each member owns one phase, producing the artifact that mirrors the Spec Kit prompt.
 
@@ -206,12 +215,12 @@ The Squad team orchestrates the full Spec Kit lifecycle. Each member owns one ph
 
 **Key insights:**
 
-- `/speckit.*` commands are interactive Copilot Chat directives. Each Squad member follows the equivalent speckit prompt and produces its artifact.
-- **Neo (Lead)** sequences the phases, gates each handoff, and ensures artifacts feed into the next phase.
+- `/speckit.*` commands are interactive Copilot Chat directives invoked via the **Spec Kit companion extension**. Each Squad member follows the equivalent speckit prompt and produces its artifact.
+- **Neo (Lead)** sequences the phases, gates each handoff, and ensures artifacts feed into the next phase. You interact with the Squad via the **Squad UI extension** in VS Code.
 - **Cypher's checklist is a hard gate** — no implementation starts until it passes.
 - **Link must provision skills BEFORE Seraph begins implementation.**
 
-## Step 3 — Initialize Spec Kit
+## Step 4 — Initialize Spec Kit
 
 From `examples/etl-climate-pipeline`:
 
@@ -221,7 +230,7 @@ specify init --here --ai copilot
 
 Accept the defaults. This creates `.specify/` and registers `/speckit.*` slash commands.
 
-## Step 4 — Constitution (Morpheus)
+## Step 5 — Constitution (Morpheus)
 
 In **Copilot Chat → Agent mode**, send:
 
@@ -241,7 +250,7 @@ Principles for the climate data ETL:
 
 **Morpheus produces:** `constitution` artifact in `.specify/`.
 
-## Step 5 — Specify + Clarify (Oracle)
+## Step 6 — Specify + Clarify (Oracle)
 
 In Copilot Chat:
 
@@ -272,7 +281,7 @@ Address open questions:
 
 **Oracle produces:** `specification` and `clarifications` artifacts.
 
-## Step 6 — Plan (Niobe)
+## Step 7 — Plan (Niobe)
 
 In Copilot Chat:
 
@@ -292,7 +301,7 @@ Given the spec:
 
 **Niobe produces:** `plan` artifact.
 
-## Step 7 — Tasks + Analyze (Dozer)
+## Step 8 — Tasks + Analyze (Dozer)
 
 In Copilot Chat:
 
@@ -323,7 +332,7 @@ Then:
 
 **Dozer produces:** `tasks` and `analysis` artifacts.
 
-## Step 8 — Checklist (Cypher)
+## Step 9 — Checklist (Cypher)
 
 In Copilot Chat:
 
@@ -345,7 +354,7 @@ Verify against plan:
 
 **Cypher produces:** `checklist` artifact. **All items must pass before proceeding.**
 
-## Step 9 — Skills Provisioning (Link)
+## Step 10 — Skills Provisioning (Link)
 
 In Copilot Chat:
 
@@ -363,7 +372,7 @@ I'll use skill-creator to scaffold both, then Seraph will reference them during 
 
 **Link produces:** find-skills installed, `postgres-etl` and `dataset-ingestion` skills registered.
 
-## Step 10 — Implement (Seraph orchestrates Tank/Trinity/Switch)
+## Step 11 — Implement (Seraph orchestrates Tank/Trinity/Switch)
 
 In Copilot Chat:
 
@@ -397,7 +406,7 @@ python pipeline.py
 
 Expected output: row counts for each table and validation queries.
 
-## Step 11 — Validation (Switch)
+## Step 12 — Validation (Switch)
 
 In Copilot Chat:
 
@@ -437,7 +446,7 @@ LIMIT 10;
 
 All tables populated and joins working? **Validation complete.**
 
-## Step 12 — Troubleshooting
+## Step 13 — Troubleshooting
 
 | Issue | Solution |
 |-------|----------|

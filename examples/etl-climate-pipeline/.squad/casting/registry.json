@@ -1,0 +1,100 @@
+{
+  "agents": {
+    "neo": {
+      "persistent_name": "Neo",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Lead / SDD Architect"
+    },
+    "morpheus": {
+      "persistent_name": "Morpheus",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Constitution Architect (speckit.constitution)"
+    },
+    "oracle": {
+      "persistent_name": "Oracle",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Requirements Analyst (speckit.specify + clarify)"
+    },
+    "niobe": {
+      "persistent_name": "Niobe",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Technical Planner (speckit.plan)"
+    },
+    "dozer": {
+      "persistent_name": "Dozer",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Task Engineer (speckit.tasks + analyze)"
+    },
+    "cypher": {
+      "persistent_name": "Cypher",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Quality Gatekeeper (speckit.checklist)"
+    },
+    "link": {
+      "persistent_name": "Link",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Skills Manager (find-skills / skill-creator)"
+    },
+    "seraph": {
+      "persistent_name": "Seraph",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Implementation Orchestrator (speckit.implement)"
+    },
+    "trinity": {
+      "persistent_name": "Trinity",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Sample-App Engineer"
+    },
+    "tank": {
+      "persistent_name": "Tank",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Tooling & Skills Engineer"
+    },
+    "switch": {
+      "persistent_name": "Switch",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Tester / QA"
+    },
+    "scribe": {
+      "persistent_name": "Scribe",
+      "universe": "The Matrix",
+      "created_at": "2026-06-17T08:30:00Z",
+      "legacy_named": false,
+      "status": "active",
+      "role": "Session Logger"
+    }
+  }
+}
