@@ -48,11 +48,21 @@ pg_isready -h localhost -U etl -d climate_db
 
 Connection string: `postgresql://etl:etl_workshop@localhost:5432/climate_db`
 
-## Step 2 — Initialize Squad and hire the team
+## Step 2 — Open the folder and initialize Spec Kit
 
-First, open **only the `examples/etl-climate-pipeline` folder** in VS Code (File → Open Folder…) so the Squad and Spec Kit stay scoped to this example, isolated from the repo-root squad.
+Open **only the `examples/etl-climate-pipeline` folder** in VS Code (File → Open Folder…) so Spec Kit and the Squad stay scoped to this example, isolated from the repo-root squad.
 
-Then scaffold a **folder-scoped** Squad inside it:
+Initialize Spec Kit **first** — it creates the `/speckit.*` commands and the speckit custom agent definitions in `.github/agents` that the Squad needs to reference:
+
+```bash
+specify init --here --ai copilot
+```
+
+Creates `.specify/`, registers `/speckit.*`, and writes the `speckit.*.agent.md` definitions under `.github/agents`.
+
+## Step 3 — Initialize Squad and hire the team
+
+Now scaffold a **folder-scoped** Squad:
 
 ```bash
 squad init
@@ -69,16 +79,6 @@ Combine two public open datasets and land them in the local PostgreSQL container
 ```
 
 Review the proposed roster and confirm before proceeding.
-
-## Step 3 — Initialize Spec Kit
-
-From `examples/etl-climate-pipeline`:
-
-```bash
-specify init --here --ai copilot
-```
-
-Creates `.specify/` and registers `/speckit.*` commands.
 
 ## Step 4 — Run the Spec Kit process (one prompt) and stop for validation
 
