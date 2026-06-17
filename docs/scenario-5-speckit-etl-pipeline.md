@@ -65,11 +65,11 @@ When prompted, choose **Copilot** as the AI agent and your **terminal** choice. 
 The Skills Manager uses **find-skills** and **skill-creator** to give the team the capabilities it needs. Install both into this project so the Squad can use them:
 
 ```bash
-mkdir -p .github/skills
-cp -R ../../.github/skills/find-skills ../../.github/skills/skill-creator .github/skills/
+npx skills add https://github.com/vercel-labs/skills --skill find-skills
+npx skills add https://github.com/anthropics/skills --skill skill-creator
 ```
 
-These ship with the workshop repo. `find-skills` discovers skills from the open ecosystem (`npx skills`); `skill-creator` scaffolds new ones when nothing suitable exists.
+`find-skills` discovers skills from the open ecosystem; `skill-creator` scaffolds new ones when nothing suitable exists.
 
 ## Step 4 — Initialize Squad and hire the team
 
