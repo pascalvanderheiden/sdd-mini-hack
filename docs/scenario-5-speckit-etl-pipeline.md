@@ -73,9 +73,14 @@ In VS Code, open **Copilot Chat** and select the **Squad** custom agent from the
 ```
 Set up a Squad to build a greenfield ETL pipeline with Spec Kit, scoped to this folder. We build the pipeline green-field: spec the contract, then the agents build the pipeline.
 
-Next to the members that are needed to do the migration (core team), add extra squad members for every speckit custom agent definition present in the .github/agents folder. Have the squad lead orchestrate the speckit method by invoking each speckit squad member in the right time. The member that follows the speckit.implement.agent.md directive needs to orchestrate the core team to do the development. Add an extra squad member that will manage skills, using find-skills or skill-creator, to give the team the capabilities they need to execute this task before they implement.
+The team needs:
+- A core team with the members needed to build the pipeline.
+- One extra squad member for every speckit custom agent definition present in the .github/agents folder.
+- The squad lead orchestrates the speckit method, invoking each speckit squad member at the right time.
+- The member that follows the speckit.implement.agent.md directive orchestrates the core team to do the development.
+- One extra squad member to manage skills, using find-skills or skill-creator, to give the team the capabilities they need to execute this task before they implement.
 
-Combine two public open datasets and land them in the local PostgreSQL container.
+The use case: combine two public open datasets and land them in the local PostgreSQL container.
 ```
 
 Review the proposed roster and confirm before proceeding.
