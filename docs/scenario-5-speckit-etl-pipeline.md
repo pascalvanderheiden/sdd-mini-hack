@@ -13,7 +13,7 @@ See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
 - Python 3.12+ & uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` & `specify check`
 - Optional: Spec Kit companion extension (VS Code), psql client.
-- **Squad is already installed as a repo prereq** — you use the Squad custom agent in Copilot Chat to hire your team.
+- **Squad CLI** (from Brady Gaster's GitHub): `npm install -g github:bradygaster/squad`
 
 ## Step 0 — Test the source endpoints first
 
@@ -60,7 +60,18 @@ specify init .
 
 When prompted, choose **Copilot** as the AI agent and your **terminal** choice. This creates `.specify/`, registers `/speckit.*`, and writes the `speckit.*.agent.md` definitions under `.github/agents`.
 
-## Step 3 — Initialize Squad and hire the team
+## Step 3 — Install the skills tooling
+
+The Skills Manager uses **find-skills** and **skill-creator** to give the team the capabilities it needs. Install both into this project so the Squad can use them:
+
+```bash
+mkdir -p .github/skills
+cp -R ../../.github/skills/find-skills ../../.github/skills/skill-creator .github/skills/
+```
+
+These ship with the workshop repo. `find-skills` discovers skills from the open ecosystem (`npx skills`); `skill-creator` scaffolds new ones when nothing suitable exists.
+
+## Step 4 — Initialize Squad and hire the team
 
 Now scaffold a **folder-scoped** Squad:
 
@@ -85,7 +96,7 @@ The use case: combine two public open datasets and land them in the local Postgr
 
 Review the proposed roster and confirm before proceeding.
 
-## Step 4 — Run the Spec Kit process (one prompt) and stop for validation
+## Step 5 — Run the Spec Kit process (one prompt) and stop for validation
 
 The Squad Lead runs the entire upstream lifecycle from a **single prompt**. Give it the concrete use case so the spec is grounded in real data:
 
@@ -113,7 +124,7 @@ Create the constitution, the spec, the plan, and the tasks, and have the Skills 
 
 The Lead distributes to the phase members. You get **constitution, spec, plan, tasks**, and a skills list. Review before continuing.
 
-## Step 5 — Validate the specs
+## Step 6 — Validate the specs
 
 - Review **constitution** for principles (data sources, normalization, year range, load target).
 - Review **spec** for data model (column mappings, join strategy, schema).
@@ -122,7 +133,7 @@ The Lead distributes to the phase members. You get **constitution, spec, plan, t
 
 Refine by replying to the Lead if needed. Otherwise, proceed.
 
-## Step 6 — Implement (one prompt)
+## Step 7 — Implement (one prompt)
 
 Once specs are validated, send:
 
@@ -132,7 +143,7 @@ Specs look good. Lead, kick off the implementation in one go following the Spec 
 
 The Implement-phase member orchestrates the core team (database setup, pipeline code, tests) to build `examples/etl-climate-pipeline/pipeline.py` and load the data.
 
-## Step 7 — Validate the pipeline
+## Step 8 — Validate the pipeline
 
 Run the pipeline (if not already done):
 

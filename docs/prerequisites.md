@@ -48,6 +48,7 @@
 
 | Requirement | macOS install command | Windows install command |
 |---|---|---|
+| Squad CLI (Brady Gaster's GitHub) | `npm install -g github:bradygaster/squad` | `npm install -g github:bradygaster/squad` |
 | Docker Desktop (recommended) | `brew install --cask docker` | `winget install -e --id Docker.DockerDesktop` |
 | colima (optional macOS alternative) | `brew install colima docker` then `colima start` | N/A (use Docker Desktop) |
 | Docker Compose | Included with Docker Desktop / colima | Included with Docker Desktop |
