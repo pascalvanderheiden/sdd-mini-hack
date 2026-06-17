@@ -14,7 +14,7 @@ Pick **one** of the four scenarios below, watch the short video, and follow the 
 | 2 | Brownfield Feature | Copilot Plan Mode | [`examples/bookshelf-app`](examples/bookshelf-app) | [docs/scenario-2-plan-mode-bookshelf.md](docs/scenario-2-plan-mode-bookshelf.md) |
 | 3 | Legacy Modernization | Spec Kit | [`examples/legacy-cobol-library`](examples/legacy-cobol-library) | [docs/scenario-3-speckit-cobol.md](docs/scenario-3-speckit-cobol.md) |
 | 4 | Personal Assistant | Copilot CLI + Squad + OpenSpec | _none, the squad creates it_ | [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md) |
-| 5 | ETL Pipeline (data) | Spec Kit + Squad | _none, the squad builds it_ | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
+| 5 | ETL Pipeline (data) | Copilot CLI + Squad + Spec Kit | _none, the squad builds it_ | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
 
 ## Common prerequisites (all scenarios)
 
