@@ -81,13 +81,31 @@ Creates `.specify/` and registers `/speckit.*` commands.
 
 ## Step 4 — Run the Spec Kit process (one prompt) and stop for validation
 
-The Squad Lead runs the entire upstream lifecycle from a **single prompt**. Send:
+The Squad Lead runs the entire upstream lifecycle from a **single prompt**. Give it the concrete use case so the spec is grounded in real data:
 
 ```
-Lead, run the Spec Kit process for this pipeline: create the constitution, the spec, the plan, and the tasks, and have the Skills Manager find the skills we need. Then stop so I can validate the specs before implementation.
+Lead, run the Spec Kit process for this ETL pipeline, then stop so I can validate the specs before implementation.
+
+Use case: build a Python pipeline that combines two public datasets and loads them into the local PostgreSQL "climate" schema (already created by init.sql with tables co2_emissions, population, country_metrics).
+
+Source 1 — OWID CO₂ (CC-BY-4.0):
+https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv
+columns include country, year, iso_code, co2, co2_per_capita, population.
+
+Source 2 — Datahub population (PDDL):
+https://raw.githubusercontent.com/datasets/population/main/data/population.csv
+columns: Country Name, Country Code (ISO-3), Year, Value.
+
+Requirements:
+- Download both CSVs, normalize column names and types, drop rows without an ISO-3 code.
+- Load co2_emissions from Source 1 and population from Source 2.
+- Build country_metrics by joining the two on iso_code + year (CO₂ totals/per-capita alongside population).
+- Idempotent loads (safe to re-run), use bulk COPY/insert, and connect via postgresql://etl:etl_workshop@localhost:5432/climate_db.
+
+Create the constitution, the spec, the plan, and the tasks, and have the Skills Manager find the skills we need (e.g. Postgres loading, CSV/ETL, data validation).
 ```
 
-The Lead distributes to phase members. You get **constitution, spec, plan, tasks**, and a skills list. Review before continuing.
+The Lead distributes to the phase members. You get **constitution, spec, plan, tasks**, and a skills list. Review before continuing.
 
 ## Step 5 — Validate the specs
 
