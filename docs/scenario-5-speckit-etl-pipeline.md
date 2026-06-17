@@ -50,14 +50,15 @@ Connection string: `postgresql://etl:etl_workshop@localhost:5432/climate_db`
 
 ## Step 2 — Initialize Squad and hire the team
 
-First scaffold a **folder-scoped** Squad inside the example so it stays isolated from the repo-root squad:
+First, open **only the `examples/etl-climate-pipeline` folder** in VS Code (File → Open Folder…) so the Squad and Spec Kit stay scoped to this example, isolated from the repo-root squad.
+
+Then scaffold a **folder-scoped** Squad inside it:
 
 ```bash
-cd examples/etl-climate-pipeline
 squad init
 ```
 
-Then, in VS Code, open **Copilot Chat** and select the **Squad** custom agent from the agent dropdown (defined in `.github/agents/squad.agent.md`). Send one prompt:
+In VS Code, open **Copilot Chat** and select the **Squad** custom agent from the agent dropdown (defined in `.github/agents/squad.agent.md`). Send one prompt:
 
 ```
 Set up a Squad to build a greenfield ETL pipeline with Spec Kit, scoped to this folder. We build the pipeline green-field: spec the contract, then the agents build the pipeline.
