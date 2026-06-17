@@ -13,7 +13,7 @@ See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
 - Python 3.12+ & uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` & `specify check`
 - Optional: Spec Kit companion extension (VS Code), psql client.
-- **Squad CLI** (from Brady Gaster's GitHub): `npm install -g github:bradygaster/squad`
+- **Squad CLI**: `npm install -g @bradygaster/squad-cli`
 
 ## Step 0 — Test the source endpoints first
 
