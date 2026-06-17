@@ -3,343 +3,66 @@
 Execute the **complete Spec Kit lifecycle** orchestrated by **Squad**, landing two public climate datasets into a local PostgreSQL container.
 
 **Time:** ~60 minutes  
-**Tooling:** Squad (VS Code · Squad UI) + Spec Kit + Docker + Python 3.12+ + PostgreSQL
+**Tooling:** VS Code + GitHub Copilot (Squad custom agent) + Spec Kit + Docker + Python 3.12+ + PostgreSQL
 
 ## Prereqs
 
-See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.md).
+See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
+- VS Code + GitHub Copilot + Copilot Chat signed in.
+- Docker — **Docker Desktop** (most users) or **colima** (macOS CLI alternative: `brew install colima docker`, then `colima start`).
+- Python 3.12+ & uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` & `specify check`
+- Optional: Spec Kit companion extension (VS Code), psql client.
+- **Squad is already installed as a repo prereq** — you use the Squad custom agent in Copilot Chat to hire your team.
 
-- VS Code with GitHub Copilot + Copilot Chat signed in.
-- **Squad UI** (VS Code extension):
-  - In VS Code, open the Extensions view (**Cmd/Ctrl+Shift+X**) and search for **Squad UI**.
-  - Install the Squad UI extension from the marketplace: https://marketplace.visualstudio.com/search?term=squad&target=VSCode
-  - Confirm the publisher in the marketplace before installing.
-- **Spec Kit companion** (VS Code extension):
-  - In the Extensions view, search for **Spec Kit** and install the companion extension.
-  - Marketplace search: https://marketplace.visualstudio.com/search?term=spec%20kit&target=VSCode
-  - Confirm the publisher in the marketplace before installing.
-- **Docker** with docker compose (`docker --version`, `docker compose version`).
-- **Python 3.12+** and **uv**:
-  - `curl -LsSf https://astral.sh/uv/install.sh | sh`
-- **Spec Kit CLI**:
-  - `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git`
-  - `specify check`
-- **psql client** (optional but recommended for validation):
-  - macOS: `brew install postgresql@16`
-  - Linux: `sudo apt-get install -y postgresql-client`
+## Step 0 — Test the source endpoints first
 
-## Step 0 — Verify source dataset endpoints (REQUIRED)
-
-Never build an ETL on an endpoint you haven't verified. Test both data sources first.
-
-**Dataset A — OWID CO₂ Emissions (CC-BY-4.0, ~6 MB CSV)**
+Verify both data sources before building the pipeline.
 
 ```bash
+# OWID CO₂ (CC-BY-4.0)
 curl -sI https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv
-```
+curl -s https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv | head -3
 
-Healthy response:
-
-```
-HTTP/2 200
-content-type: text/plain; charset=utf-8
-```
-
-Verify headers:
-
-```bash
-curl -s https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv | head -5
-```
-
-Expected columns include: `country, year, iso_code, co2, co2_per_capita, gdp, population, ...` (and others).
-
-**Dataset B — Datahub Population (PDDL public domain, ~1 MB CSV)**
-
-```bash
+# Datahub Population (PDDL public domain)
 curl -sI https://raw.githubusercontent.com/datasets/population/main/data/population.csv
+curl -s https://raw.githubusercontent.com/datasets/population/main/data/population.csv | head -3
 ```
 
-Healthy response:
+Both should return **HTTP 200** with CSV headers. If not, check network access or use local copies.
 
-```
-HTTP/2 200
-content-type: text/plain; charset=utf-8
-```
+## Step 1 — Stand up the target database
 
-Verify headers:
+The folder `examples/etl-climate-pipeline/` already has `docker-compose.yml` and `init.sql` (schema "climate" with tables: co2_emissions, population, country_metrics).
+
+Start the container:
 
 ```bash
-curl -s https://raw.githubusercontent.com/datasets/population/main/data/population.csv | head -5
-```
+# Make sure Docker is running: start Docker Desktop, or on colima run `colima start`
 
-Expected columns: `Country Name, Country Code, Year, Value`
-
-> Both endpoints return 200 with CSV rows? Proceed to Step 1. Otherwise, fix network access or use a local copy of the data.
-
-## Step 1 — Open the example folder in VS Code
-
-```bash
-code examples/etl-climate-pipeline
-```
-
-This opens the pre-scaffolded example folder. **Important:** The dedicated Squad team in `examples/etl-climate-pipeline/.squad/` is **separate from the repo-root squad** — the two never conflict. The folder-scoped squad orchestrates only this ETL pipeline scenario.
-
-## Step 2 — Set up the target database
-
-**Owner: 🔧 Tank** (Phase 0 — Setup)
-
-Stand up and verify PostgreSQL before writing any pipeline code.
-
-### Start Colima (macOS only)
-
-On **macOS**, containers run via **colima** as the Docker runtime. Start it before running docker compose:
-
-```bash
-colima start
-```
-
-Verify Docker is connected:
-
-```bash
-docker info
-```
-
-If you see "Cannot connect to the Docker daemon," run `colima start` again.
-
-> Windows users: Docker Desktop starts automatically; no colima needed.
-
-### Set up PostgreSQL
-
-### Set up PostgreSQL
-
-The `examples/etl-climate-pipeline/` folder already includes `docker-compose.yml` and `init.sql`. Review them:
-
-```yaml
-services:
-  postgres:
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_USER: etl
-      POSTGRES_PASSWORD: etl_workshop
-      POSTGRES_DB: climate_db
-      POSTGRES_INITDB_ARGS: "-c max_connections=50"
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U etl"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - climate_net
-
-volumes:
-  pgdata:
-
-networks:
-  climate_net:
-    driver: bridge
-```
-
-**`init.sql` (already in folder — target schema + 3 tables):**
-
-```sql
-CREATE SCHEMA IF NOT EXISTS climate;
-
--- 1. CO2 emissions (source A)
-CREATE TABLE climate.co2_emissions (
-    id SERIAL PRIMARY KEY,
-    iso_code VARCHAR(3),
-    year INTEGER,
-    country VARCHAR(255),
-    co2 NUMERIC,
-    co2_per_capita NUMERIC,
-    gdp NUMERIC,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- 2. Population (source B)
-CREATE TABLE climate.population (
-    id SERIAL PRIMARY KEY,
-    iso_code VARCHAR(3),
-    country_name VARCHAR(255),
-    year INTEGER,
-    value BIGINT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- 3. Materialized join (computed metrics)
-CREATE TABLE climate.country_metrics (
-    id SERIAL PRIMARY KEY,
-    iso_code VARCHAR(3),
-    country_name VARCHAR(255),
-    year INTEGER,
-    co2_mt NUMERIC,
-    population BIGINT,
-    co2_per_capita_check NUMERIC,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Indexes for join queries
-CREATE INDEX idx_co2_iso_year ON climate.co2_emissions(iso_code, year);
-CREATE INDEX idx_pop_iso_year ON climate.population(iso_code, year);
-CREATE INDEX idx_metrics_iso_year ON climate.country_metrics(iso_code, year);
-```
-
-**Start the database:**
-
-```bash
+cd examples/etl-climate-pipeline
 docker compose up -d
-```
-
-**Verify readiness:**
-
-```bash
 docker compose ps
 pg_isready -h localhost -U etl -d climate_db
 ```
 
-Both should show "accepting connections".
+Connection string: `postgresql://etl:etl_workshop@localhost:5432/climate_db`
 
-**Test a psql connection (if psql is installed):**
+## Step 2 — Switch to the Squad custom agent and hire the team
 
-```bash
-psql -h localhost -U etl -d climate_db -c "SELECT version();"
-```
-
-When prompted, enter password: `etl_workshop`
-
-> Database running and healthy? Move to Step 3.
-
-## Step 3 — Create your own Squad
-
-**YOU will create the dedicated Squad for this scenario.** This is a learning objective: building and prompting for a precisely scoped team is part of the Spec Kit discipline.
-
-### Install Squad CLI
-
-In your terminal (anywhere):
-
-```bash
-npm install -g @bradygaster/squad-cli
-squad doctor
-```
-
-Verify output shows Squad CLI version and Node.js OK.
-
-### Initialize Squad in the example folder
-
-**Navigate to the example folder and initialize Squad THERE:**
-
-```bash
-cd examples/etl-climate-pipeline
-squad init
-```
-
-**Important:** Running `squad init` *inside this folder* creates a `.squad/` directory **local to this example**. This keeps it isolated from the repo-root `.squad/` (which is the meta team for extending the SDD hacks). The two squads never conflict because they are in separate folders.
-
-Verify:
-
-```bash
-ls -la .squad/
-```
-
-### Open the Squad UI and hire the team
-
-Open **VS Code** in this folder:
-
-```bash
-code .
-```
-
-Open the **Squad UI extension** in VS Code. This launches the Squad coordinator interface where you'll hire the team.
-
-#### Prompt for a crystal-clear team
-
-The precision of your prompt determines the clarity of the hired team. Follow these guidelines:
-
-**State the goal:** Describe the scenario — a greenfield ETL pipeline with the full Spec Kit lifecycle.
-
-**Name the roles explicitly:** List roles by name and count. Avoid vague requests like "set up a team"; instead name the phases and the core team members.
-
-**Ask for one member per Spec Kit phase + supporting roles:** Constitution, Specify, Clarify, Plan, Tasks, Analyze, Checklist, Implement, Validation — PLUS a Skills Manager (for find-skills provisioning) and a core build team (pipeline engineer, database/tooling engineer, tester).
-
-**Clarify orchestration:** Ask the Lead to sequence the phases in order. Ask the Implement-phase member to orchestrate the core build team during implementation.
-
-**Request isolation:** Remind the coordinator this squad is scoped to this folder only.
-
-**Review and refine:** Ask to see the proposed roster before confirming.
-
-#### Example prompt (copy and adapt):
+In VS Code, open **Copilot Chat** and select the **Squad** custom agent from the agent dropdown (defined in `.github/agents/squad.agent.md`). Then send one prompt:
 
 ```
-Set up a dedicated Squad for this folder to build a greenfield ETL pipeline with Spec Kit.
+Set up a Squad to build a greenfield ETL pipeline with Spec Kit, scoped to this folder.
 
-I want:
-- A Lead (Neo) who orchestrates the full Spec Kit lifecycle in order.
-- One member per Spec Kit phase:
-  - Constitution (Morpheus): principles & guardrails
-  - Specify + Clarify (Oracle): data model & requirements
-  - Plan (Niobe): technical architecture
-  - Tasks + Analyze (Dozer): task breakdown & dependency analysis
-  - Checklist (Cypher): quality gate
-  - Skills provisioning (Link): find-skills and capability provisioning
-  - Implement (Seraph): orchestrates the core build team (Tank, Trinity, Switch)
-  - Validation (Switch): end-to-end tests and data verification
-- A core build team under Seraph:
-  - Tank: database setup and connection handling
-  - Trinity: pipeline logic (download, parse, join, load)
-  - Switch: smoke tests and end-to-end validation
-- A Skills Manager (Link) who provisions postgres-etl and dataset-ingestion capabilities via find-skills before implementation begins.
+We build the pipeline green-field: spec the contract, then the squad builds it. It's important the squad can execute the Spec Kit process completely. So, next to the core team needed to build the pipeline, add an extra squad member for every Spec Kit custom agent in .github/agents (constitution, specify, clarify, plan, tasks, analyze, checklist, implement). Have the Lead orchestrate the Spec Kit method, invoking each Spec Kit member at the right time. The member that follows speckit.implement should orchestrate the core team to do the development. Add an extra member to manage skills using find-skills or skill-creator, to give the team the capabilities they need before they implement.
 
-The Implement-phase member (Seraph) should orchestrate Tank/Trinity/Switch.
-
-Keep this squad scoped to this folder only (isolated from the repo-root squad).
-
-Show me the proposed roster and wait for my approval before confirming.
+Combine two public open datasets and land them in the local PostgreSQL container.
 ```
 
-#### Tips for clear prompting
+Review the proposed roster and confirm before proceeding.
 
-- **Be explicit about roles and counts:** Name each role and how many members. Avoid generic requests.
-- **Reference the methodology:** Say "Spec Kit" by name and list the phases in order.
-- **State the isolation requirement:** Tell the coordinator this squad stays in this folder.
-- **Iterate on the roster:** Ask to see the proposed team before confirming. If the roster is unclear or missing a role, refine your prompt and try again.
-
-### Confirm the roster
-
-Once the Squad UI shows the proposed team and you approve it, the squad is **hired and active** in `.squad/`.
-
-> Squad initialized and roster confirmed? Move to Step 4.
-
-## Step 4 — Meet your Squad
-
-The Squad team orchestrates the full Spec Kit lifecycle. Each member owns one phase, producing the artifact that mirrors the Spec Kit prompt.
-
-**Spec Kit Lifecycle Orchestration — Squad Member Assignments:**
-
-| Phase | Spec Kit Command | Squad Member | Role |
-|-------|------------------|--------------|------|
-| 0 | Setup | 🔧 Tank | infra, Docker, Spec Kit init |
-| 1 | Constitution | 📜 Morpheus | principles & guardrails |
-| 2 | Specify + Clarify | 🔮 Oracle | requirements & data model |
-| 3 | Plan | 🗺️ Niobe | technical architecture |
-| 4 | Tasks + Analyze | 🧩 Dozer | task breakdown & analysis |
-| 5 | Checklist | ✅ Cypher | quality gate |
-| 6 | Skills provisioning | 🧰 Link | install find-skills, provision capabilities |
-| 7 | Implement | 🛠️ Seraph | orchestrates Tank/Trinity/Switch to build |
-| 8 | Validation | 🧪 Switch | end-to-end tests, data verification |
-
-**Key insights:**
-
-- `/speckit.*` commands are interactive Copilot Chat directives invoked via the **Spec Kit companion extension**. Each Squad member follows the equivalent speckit prompt and produces its artifact.
-- **Neo (Lead)** sequences the phases, gates each handoff, and ensures artifacts feed into the next phase. You interact with the Squad via the **Squad UI extension** in VS Code.
-- **Cypher's checklist is a hard gate** — no implementation starts until it passes.
-- **Link must provision skills BEFORE Seraph begins implementation.**
-
-## Step 5 — Initialize Spec Kit
+## Step 3 — Initialize Spec Kit
 
 From `examples/etl-climate-pipeline`:
 
@@ -347,243 +70,70 @@ From `examples/etl-climate-pipeline`:
 specify init --here --ai copilot
 ```
 
-Accept the defaults. This creates `.specify/` and registers `/speckit.*` slash commands.
+Creates `.specify/` and registers `/speckit.*` commands.
 
-## Step 6 — Constitution (Morpheus)
+## Step 4 — Run the Spec Kit process (one prompt) and stop for validation
 
-In **Copilot Chat → Agent mode**, send:
+The Squad Lead runs the entire upstream lifecycle from a **single prompt**. Send:
 
-```text
-Neo, I'm Morpheus. Let's draft the constitution for this ETL pipeline.
-
-Principles for the climate data ETL:
-- Download OWID CO₂ data and Datahub Population data from public endpoints (no authentication).
-- Normalize ISO-3166-alpha-3 country codes across both datasets.
-- Filter to years 2000–2023.
-- Join on (iso_code, year) and compute co2_per_capita_check = co2_mt*1e6/population as a validation field.
-- Load into PostgreSQL 16 local container, schema "climate", three tables: co2_emissions, population, country_metrics.
-- Python 3.12+ (stdlib csv + psycopg binary protocol, no pandas).
-- Single entry point: python pipeline.py after docker compose up.
-- Testable: validate row counts and join integrity in a run-test suite.
+```
+Lead, run the Spec Kit process for this pipeline: create the constitution, the spec, the plan, and the tasks, and have the Skills Manager find the skills we need. Then stop so I can validate the specs before implementation.
 ```
 
-**Morpheus produces:** `constitution` artifact in `.specify/`.
+The Lead distributes to phase members. You get **constitution, spec, plan, tasks**, and a skills list. Review before continuing.
 
-## Step 7 — Specify + Clarify (Oracle)
+## Step 5 — Validate the specs
 
-In Copilot Chat:
+- Review **constitution** for principles (data sources, normalization, year range, load target).
+- Review **spec** for data model (column mappings, join strategy, schema).
+- Review **plan** for architecture (download → normalize → join → COPY-load).
+- Review **tasks** for breakdown and dependencies.
 
-```text
-Oracle here. Let's specify and clarify the ETL.
+Refine by replying to the Lead if needed. Otherwise, proceed.
 
-/speckit.specify
+## Step 6 — Implement (one prompt)
 
-Read the constitution. Download each dataset endpoint (curl) and inspect the raw CSV:
-- OWID: https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv
-- Datahub: https://raw.githubusercontent.com/datasets/population/main/data/population.csv
+Once specs are validated, send:
 
-Derive the data model:
-- Column mappings for each source.
-- Normalization rules (how to map country names → ISO codes).
-- Join strategy (year + iso_code).
-- Materialized country_metrics table schema.
-
-Then:
-
-/speckit.clarify
-
-Address open questions:
-- How do we handle countries with missing data in either source?
-- What happens if year ranges don't overlap?
-- Should the pipeline be idempotent (truncate & reload each run)?
+```
+Specs look good. Lead, kick off the implementation in one go following the Spec Kit implement pattern, distributing the tasks to the core team. Build the pipeline and load both datasets into PostgreSQL.
 ```
 
-**Oracle produces:** `specification` and `clarifications` artifacts.
+The Implement-phase member orchestrates the core team (database setup, pipeline code, tests) to build `examples/etl-climate-pipeline/pipeline.py` and load the data.
 
-## Step 8 — Plan (Niobe)
+## Step 7 — Validate the pipeline
 
-In Copilot Chat:
-
-```text
-Niobe here. Let's plan the technical approach.
-
-/speckit.plan
-
-Given the spec:
-- Architecture: download → normalize → join → COPY-load.
-- Python modules: urllib or requests (choose one), csv stdlib, psycopg.
-- Entry point: pipeline.py with a main() function.
-- Config: connection string from environment (fallback to localhost defaults).
-- Error handling: graceful exit on download/parse/DB failures.
-- Deliverables: pipeline.py, config.py (or inline secrets), simple test harness.
-```
-
-**Niobe produces:** `plan` artifact.
-
-## Step 9 — Tasks + Analyze (Dozer)
-
-In Copilot Chat:
-
-```text
-Dozer here. Let's break down the work and analyze it.
-
-/speckit.tasks
-
-Create a task list (small, ordered):
-1. Download OWID CSV, parse, normalize ISO codes.
-2. Download Datahub CSV, parse, normalize ISO codes.
-3. Filter both to year range 2000–2023.
-4. Join on (iso_code, year), compute metrics.
-5. Establish DB connection and create tables (schema already exists).
-6. COPY-load co2_emissions table.
-7. COPY-load population table.
-8. Materialize country_metrics join.
-9. Write smoke tests (row counts, sample queries).
-
-Then:
-
-/speckit.analyze
-
-- What are the top risks? (endpoint downtime, encoding mismatches, NULL handling)
-- What's the longest pole? (likely download + join compute time)
-- Any dependencies between tasks? (schema must exist before COPY)
-```
-
-**Dozer produces:** `tasks` and `analysis` artifacts.
-
-## Step 10 — Checklist (Cypher)
-
-In Copilot Chat:
-
-```text
-Cypher here. Quality gate check.
-
-/speckit.checklist
-
-Verify against plan:
-☐ Spec is complete (data model, join logic, nullable fields documented).
-☐ No external dependencies beyond psycopg (no pandas).
-☐ Error handling for network, parsing, DB connection.
-☐ Config uses environment variables (DB_HOST, DB_USER, DB_PASS, DB_NAME).
-☐ Target tables exist in PostgreSQL (schema "climate").
-☐ Entry point is `python pipeline.py` from the folder.
-☐ Test suite validates row counts in each table.
-☐ CSV download URLs are verified (both return HTTP 200).
-```
-
-**Cypher produces:** `checklist` artifact. **All items must pass before proceeding.**
-
-## Step 11 — Skills Provisioning (Link)
-
-In Copilot Chat:
-
-```text
-Link here. Installing skills before implementation.
-
-find-skills is currently missing. Let me install it and provision the two skills we need:
-
-1. find-skills — discovery tool for existing skills.
-2. postgres-etl — skill for psycopg setup, connection patterns, COPY operations.
-3. dataset-ingestion — skill for CSV download, parsing, normalization.
-
-I'll use skill-creator to scaffold both, then Seraph will reference them during implementation.
-```
-
-**Link produces:** find-skills installed, `postgres-etl` and `dataset-ingestion` skills registered.
-
-## Step 12 — Implement (Seraph orchestrates Tank/Trinity/Switch)
-
-In Copilot Chat:
-
-```text
-Seraph here. Orchestrating implementation.
-
-/speckit.implement
-
-I'm delegating to the core team:
-- Tank: database setup (connection pooling, retry logic).
-- Trinity: pipeline.py main logic (download, parse, join, load).
-- Switch: smoke tests (verify row counts, sample queries).
-
-Each task in order. After each, I'll ask for the code and confirm it runs.
-```
-
-**Expected deliverables in `examples/etl-climate-pipeline/`:**
-
-- `pipeline.py` — main ETL script
-- `config.py` (or inline config) — DB connection params
-- `test_pipeline.py` — smoke tests
-- `.specify/` — Spec Kit artifacts
-- `docker-compose.yml` + `init.sql` — (already created in Step 1)
-
-**After implementation, test locally:**
+Run the pipeline (if not already done):
 
 ```bash
-docker compose ps  # Verify DB is running
+docker compose ps
 python pipeline.py
 ```
 
-Expected output: row counts for each table and validation queries.
+Verify in psql:
 
-## Step 13 — Validation (Switch)
-
-In Copilot Chat:
-
-```text
-Switch here. Final validation.
-
-Run the smoke tests:
-python test_pipeline.py
-
-Then verify in PostgreSQL:
-psql -h localhost -U etl -d climate_db
+```bash
+psql -h localhost -U etl -d climate_db -c "SELECT count(*) FROM climate.co2_emissions;"
+psql -h localhost -U etl -d climate_db -c "SELECT count(*) FROM climate.population;"
+psql -h localhost -U etl -d climate_db -c "SELECT iso_code, country_name, year, co2_mt FROM climate.country_metrics LIMIT 3;"
 ```
 
-**Sample psql validation queries:**
+Both tables populated? Validation complete.
 
-```sql
--- Check table row counts
-SELECT 'co2_emissions' AS table_name, COUNT(*) AS rows FROM climate.co2_emissions
-UNION ALL
-SELECT 'population', COUNT(*) FROM climate.population
-UNION ALL
-SELECT 'country_metrics', COUNT(*) FROM climate.country_metrics;
+## Troubleshooting
 
--- Sample join: CO₂ + population for USA in 2023
-SELECT c.iso_code, c.country, c.co2, p.value AS population, c.co2_per_capita
-FROM climate.co2_emissions c
-LEFT JOIN climate.population p ON c.iso_code = p.iso_code AND c.year = p.year
-WHERE c.iso_code = 'USA' AND c.year = 2023;
-
--- Materialized metrics for top CO₂ emitters (2023)
-SELECT iso_code, country_name, year, co2_mt, population, co2_per_capita_check
-FROM climate.country_metrics
-WHERE year = 2023
-ORDER BY co2_mt DESC
-LIMIT 10;
-```
-
-All tables populated and joins working? **Validation complete.**
-
-## Step 14 — Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| `curl` returns 404 on dataset URLs | Re-run Step 0 endpoint checks. Both must return HTTP 200. |
-| Port 5432 already in use | `lsof -i :5432` to find the process; `docker compose down` if another container is running. |
-| `psycopg` import error | `pip install psycopg[binary]` or `uv pip install psycopg[binary]` |
-| `specify` not found | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` and restart terminal. |
-| DB connection refused | Verify `docker compose ps` shows postgres as "Up". Run `pg_isready -h localhost -U etl`. |
-| CSV parsing errors | Inspect raw CSV with `curl -s <url> | head -20`. Check for encoding, quoting, or delimiter mismatches. |
+- **Docker daemon not running** → start Docker Desktop, or run `colima start` (colima users).
+- **Endpoint returns 404** → Re-test Step 0; both URLs must return HTTP 200.
+- **Port 5432 in use** → `docker compose down` or `lsof -i :5432` to find the process.
+- **`specify` not found** → `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` and restart terminal.
+- **Squad agent not in picker** → Ensure `.github/agents/squad.agent.md` exists.
 
 ## What you learned
 
-✓ **Spec Kit full lifecycle**: constitution → specify → clarify → plan → tasks → analyze → checklist → skills → implement → validate.
+✓ **Squad orchestrates the full Spec Kit lifecycle** from two prompts: (1) spec, (2) implement. No per-phase manual stepping.
 
-✓ **Squad orchestration**: each phase owner (Morpheus, Oracle, Niobe, etc.) produces its artifact, with Neo gating handoffs and Cypher enforcing quality.
+✓ **Verified-source & verified-database-first discipline**: test endpoints and stand up the target schema *before* writing ETL code.
 
-✓ **Data-first discipline**: verify source endpoints and target database readiness BEFORE writing ETL code.
+✓ **Spec-first greenfield ETL**: contract (spec) drives implementation. Lead gates handoffs; Checklist enforces quality.
 
-✓ **Greenfield ETL patterns**: download + normalize + join + COPY-load with psycopg, minimal external dependencies.
-
-✓ **Real persistence**: local PostgreSQL container demonstrates how SDD applies to systems with side effects (databases, networks).
+✓ **Real persistence**: local PostgreSQL demonstrates how SDD applies to systems with side effects (databases, networks).
