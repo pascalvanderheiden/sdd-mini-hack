@@ -44,3 +44,16 @@
 | Squad CLI | `npm install -g @bradygaster/squad-cli` | `npm install -g @bradygaster/squad-cli` |
 | OpenSpec CLI | `npm install -g @fission-ai/openspec@latest` | `npm install -g @fission-ai/openspec@latest` |
 
+### Scenario 5: ETL Pipeline with Squad + Spec Kit
+
+| Requirement | macOS install command | Windows install command |
+|---|---|---|
+| Docker | `brew install --cask docker` | `winget install -e --id Docker.DockerDesktop` |
+| Docker Compose | Included with Docker Desktop | Included with Docker Desktop |
+| Python 3.12+ | `brew install python@3.12` | `winget install -e --id Python.Python.3.12` |
+| uv | `curl -LsSf https://astral.sh/uv/install.sh \| sh` | `powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://astral.sh/uv/install.ps1 \| iex"` |
+| Spec Kit CLI | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` |
+| Copilot CLI | `brew install --cask copilot-cli` | `npm install -g @github/copilot@latest` |
+| Squad CLI | `npm install -g @bradygaster/squad-cli` | `npm install -g @bradygaster/squad-cli` |
+| psql client (optional) | `brew install postgresql@16` | `winget install -e --id PostgreSQL.PostgreSQL` |
+

@@ -14,6 +14,7 @@ Pick **one** of the four scenarios below, watch the short video, and follow the 
 | 2 | Brownfield Feature | Copilot Plan Mode | [`examples/bookshelf-app`](examples/bookshelf-app) | [docs/scenario-2-plan-mode-bookshelf.md](docs/scenario-2-plan-mode-bookshelf.md) |
 | 3 | Legacy Modernization | Spec Kit | [`examples/legacy-cobol-library`](examples/legacy-cobol-library) | [docs/scenario-3-speckit-cobol.md](docs/scenario-3-speckit-cobol.md) |
 | 4 | Personal Assistant | Copilot CLI + Squad + OpenSpec | _none, the squad creates it_ | [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md) |
+| 5 | ETL Pipeline (data) | Spec Kit + Squad | _none, the squad builds it_ | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
 
 ## Common prerequisites (all scenarios)
 
@@ -116,7 +117,24 @@ https://github.com/user-attachments/assets/7b923c1d-a235-41e8-bcfd-54e54f6705de
 
 ---
 
-## Skills (optional helpers)
+## Scenario 5 — Greenfield ETL Pipeline with Squad + Spec Kit
+
+Execute the **complete Spec Kit lifecycle** orchestrated by the **Squad** team, landing two public climate datasets into a local PostgreSQL container.
+
+**Extra prereqs**
+
+- Docker with docker compose (`docker --version`).
+- Python 3.12+ and uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git`
+- GitHub Copilot CLI signed in (`copilot --help`).
+- Squad: `npm install -g @bradygaster/squad-cli` (`squad doctor`).
+- psql client (optional): `brew install postgresql@16` (macOS) or `sudo apt-get install postgresql-client` (Linux).
+
+**Demo video**
+
+N/A — Squad and Spec Kit run interactively in your terminal.
+
+→ Follow [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md)
 
 Two small skills are included under `.github/skills/`. Copilot can use them when relevant; you do not have to invoke them manually.
 
