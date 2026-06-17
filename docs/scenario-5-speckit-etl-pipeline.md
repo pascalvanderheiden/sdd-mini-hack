@@ -246,7 +246,7 @@ Verify:
 ls -la .squad/
 ```
 
-### Prompt for a crystal-clear team
+### Open the Squad UI and hire the team
 
 Open **VS Code** in this folder:
 
