@@ -55,10 +55,10 @@ Open **only the `examples/etl-climate-pipeline` folder** in VS Code (File → Op
 Initialize Spec Kit **first** — it creates the `/speckit.*` commands and the speckit custom agent definitions in `.github/agents` that the Squad needs to reference:
 
 ```bash
-specify init --here --ai copilot
+specify init .
 ```
 
-Creates `.specify/`, registers `/speckit.*`, and writes the `speckit.*.agent.md` definitions under `.github/agents`.
+When prompted, choose **Copilot** as the AI agent and your **terminal** choice. This creates `.specify/`, registers `/speckit.*`, and writes the `speckit.*.agent.md` definitions under `.github/agents`.
 
 ## Step 3 — Initialize Squad and hire the team
 
