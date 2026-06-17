@@ -41,8 +41,8 @@ Start the container:
 # Make sure Docker is running: start Docker Desktop, or on colima run `colima start`
 
 cd examples/etl-climate-pipeline
-docker compose up -d
-docker compose ps
+docker-compose up -d
+docker-compose ps
 pg_isready -h localhost -U etl -d climate_db
 ```
 
@@ -132,7 +132,7 @@ The Implement-phase member orchestrates the core team (database setup, pipeline 
 Run the pipeline (if not already done):
 
 ```bash
-docker compose ps
+docker-compose ps
 python pipeline.py
 ```
 
@@ -150,7 +150,7 @@ Both tables populated? Validation complete.
 
 - **Docker daemon not running** → start Docker Desktop, or run `colima start` (colima users).
 - **Endpoint returns 404** → Re-test Step 0; both URLs must return HTTP 200.
-- **Port 5432 in use** → `docker compose down` or `lsof -i :5432` to find the process.
+- **Port 5432 in use** → `docker-compose down` or `lsof -i :5432` to find the process.
 - **`specify` not found** → `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` and restart terminal.
 - **Squad agent not in picker** → Ensure `.github/agents/squad.agent.md` exists.
 

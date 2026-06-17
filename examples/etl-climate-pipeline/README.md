@@ -15,7 +15,7 @@ See the full scenario guide: [../../docs/scenario-5-speckit-etl-pipeline.md](../
    ```bash
    # Make sure Docker is running (Docker Desktop, or `colima start` on colima)
    cd examples/etl-climate-pipeline
-   docker compose up -d
+   docker-compose up -d
    ```
 
 3. **Note:** `pipeline.py` is built **during the scenario** (not pre-made). The Squad orchestrates the Spec Kit lifecycle to produce it.
