@@ -161,6 +161,59 @@ Full end-to-end live test: colima startup → docker compose → schema verifica
 
 **Status:** Production-ready for workshop delivery.
 
+---
+
+### 2026-06-17T09:09:00Z: Scenario 5 doc — concise, Copilot Chat Squad agent, two-prompt flow
+
+**By:** Pascal van der Heiden (via Copilot)  
+**Status:** ADOPTED — Implementation by Mouse COMPLETE
+
+Rework scenario-5 doc to be concise and to the point. Squad install is already a prereq (don't repeat as a step). Do NOT use the VS Code SquadUI extension for creating the squad — instead the learner switches to the Squad custom agent in GitHub Copilot Chat and hires the team there. The hire/example prompt should mirror the user's original session-opening ETL request (greenfield ETL, spec the contract, one member per speckit custom agent, Lead orchestrates speckit invoking each member at the right time, implement-member orchestrates the core team, add a skills manager using find-skills/skill-creator, 2 public datasets → local postgres). The squad runs the Spec Kit process via TWO prompts: (1) one prompt to the Lead → distributes to members to create constitution, specs, plan, tasks, and search for needed skills, then STOP for spec validation; (2) after the user validates the specs, one prompt to kick off implementation in one go following the speckit implement pattern, Lead distributing to core squad members. Remove the verbose per-phase steps.
+
+**Why:** User request — match the real Copilot Chat + custom-agent flow and keep the guide concise.
+
+---
+
+### 2026-06-17T11:11:00Z: Scenario 5 doc rewritten — concise, two-prompt flow, Squad custom agent
+
+**By:** Mouse (Technical Writer / DevRel)  
+**Status:** COMPLETE
+
+Rewrote `docs/scenario-5-speckit-etl-pipeline.md`: **589 lines → 141 lines** (target: 150–200). Collapsed per-phase step-by-step into 7 streamlined steps.
+
+**Key Changes:**
+- Removed SquadUI VS Code extension guidance entirely. Now uses **Squad custom agent in Copilot Chat** (`.github/agents/squad.agent.md`).
+- Removed `squad init` / CLI install from steps — Squad is a repo prereq.
+- Updated workflow to **two-prompt pattern**: (1) Lead runs constitution/spec/plan/tasks + Skills Manager finds capabilities, then STOP for validation; (2) Lead orchestrates implementation following speckit.implement pattern, distributing tasks to core team.
+- Removed long member→phase assignment table. Removed verbose per-role explanations.
+- Updated `docs/prerequisites.md`: removed Squad UI extension from Scenario 5 table, kept Spec Kit companion (optional) + Docker/colima + Python + psql.
+- Updated `examples/etl-climate-pipeline/README.md`: simplified structure, emphasized "follow the scenario guide step-by-step" approach, no per-phase detail.
+
+**Structural Changes (per directive):**
+1. **Step 0**: Test source endpoints (curl -sI, head -3). Brief, no fluff.
+2. **Step 1**: Stand up target DB. Pre-scaffolded docker-compose.yml + init.sql (no long compose/sql pastes). Show connection string.
+3. **Step 2**: Switch to Squad custom agent in Chat, hire team (example prompt mirrors user's original request: greenfield ETL, spec contract, one member per speckit custom agent, Lead orchestrates, implement member orchestrates core team, add Skills Manager). Review roster before confirming.
+4. **Step 3**: Initialize Spec Kit (specify init --here --ai copilot).
+5. **Step 4**: Run Spec Kit process (one prompt) → STOP for spec validation.
+6. **Step 5**: Validate specs (2-3 bullets).
+7. **Step 6**: Implement (one prompt) → Lead distributes to core team.
+8. **Step 7**: Validate pipeline (psql queries).
+9. **Troubleshooting**: 4-5 one-liners max.
+10. **What you learned**: 3-4 tight bullets (two-prompt orchestration, verified-source discipline, spec-first, real persistence).
+
+**Accuracy Maintained:**
+- No fabricated extension IDs (referenced Spec Kit companion by marketplace search only).
+- Example prompt exactly matches directive (greenfield ETL, spec contract, one member per speckit agent, Lead, Implement member orchestrates core team, Skills Manager using find-skills/skill-creator, two datasets → PostgreSQL).
+- Colima documented for macOS Docker runtime (brew install colima docker, colima start).
+
+**Supporting Files Updated:**
+- `.squad/agents/mouse/history.md`: appended learning entry.
+- `docs/prerequisites.md`: removed Squad UI extension.
+- `examples/etl-climate-pipeline/README.md`: concise, mirrors scenario guide.
+
+**Outcome:**
+Scenario 5 is now concise, matches the tone/length of Scenario 3 & 4, uses real Copilot Chat Squad agent workflow, and highlights the two-prompt orchestration pattern that embodies SDD discipline.
+
 ## Governance
 
 - All meaningful changes require team consensus
