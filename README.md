@@ -6,7 +6,7 @@
 
 > Learn spec-driven development and agentic engineering in one focused hour.
 
-Pick **one** of the four scenarios below, watch the short video, and follow the matching scenario doc.
+Pick **one** of the five scenarios below, watch the short video, and follow the matching scenario doc.
 
 | # | Scenario | Tooling | Sample app | Guide |
 |---|---|---|---|---|
@@ -132,7 +132,10 @@ Execute the **complete Spec Kit lifecycle** orchestrated by the **Squad** team, 
 
 **Demo video**
 
-N/A — Squad and Spec Kit run interactively in your terminal.
+[media/videos/scenario-5-cli-etl-pipeline.mp4](media/videos/scenario-5-cli-etl-pipeline.mp4)
+
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-5-cli-etl-pipeline.mp4" controls width="720"></video>
 
 → Follow [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md)
 
@@ -155,11 +158,11 @@ Two small skills are included under `.github/skills/`. Copilot can use them when
 ├── .github/skills/       # Optional Copilot skills
 ├── .vscode/              # Editor + MCP config (Playwright)
 ├── .mcp.json             # MCP config for Copilot CLI
-├── docs/                 # 4 scenario guides (one per scenario)
+├── docs/                 # 5 scenario guides (one per scenario)
 ├── examples/
 │   ├── bookshelf-app/        # Scenario 2 starter
 │   └── legacy-cobol-library/ # Scenario 3 starter (COBOL)
-├── media/videos/         # 4 demo videos
+├── media/videos/         # 5 demo videos
 └── scripts/              # Verification helper
 ```
 
