@@ -132,7 +132,7 @@ Execute the **complete Spec Kit lifecycle** orchestrated by the **Squad** team, 
 
 **Demo video**
 
-[media/videos/scenario-5-cli-etl-pipeline.mp4](media/videos/scenario-5-cli-etl-pipeline.mp4)
+https://github.com/user-attachments/assets/4317ecf4-5cca-4eb1-afa8-a43480293643
 
 <!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
 <video src="media/videos/scenario-5-cli-etl-pipeline.mp4" controls width="720"></video>
