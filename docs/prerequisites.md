@@ -58,3 +58,14 @@
 | Spec Kit CLI | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` |
 | psql client (optional) | `brew install postgresql@16` | `winget install -e --id PostgreSQL.PostgreSQL` |
 
+### Scenario 6: Angular → React Modernization with Squad + Spec Kit
+
+| Requirement | macOS install command | Windows install command |
+|---|---|---|
+| GitHub Copilot CLI | `brew install --cask copilot-cli` | `npm install -g @github/copilot@latest` |
+| Squad CLI | `npm install -g @bradygaster/squad-cli` | `npm install -g @bradygaster/squad-cli` |
+| Python 3.12+ | `brew install python@3.12` | `winget install -e --id Python.Python.3.12` |
+| uv | `curl -LsSf https://astral.sh/uv/install.sh \| sh` | `powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://astral.sh/uv/install.ps1 \| iex"` |
+| Spec Kit CLI | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` |
+| Playwright CLI (backup) | `npm install -g playwright && npx playwright install chromium` | `npm install -g playwright; npx playwright install chromium` |
+

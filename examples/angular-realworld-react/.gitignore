@@ -1,0 +1,30 @@
+# Cloned source app (reference only)
+angular-source/
+
+# Generated React app
+react-app/
+
+# Build / dependency output
+node_modules/
+dist/
+build/
+
+examples/angular-realworld-react/.DS_Store
+.DS_Store
+
+# Recording generated artifacts
+recording/node_modules/
+recording/test-results/
+recording/playwright-report/
+recording/.stitch/
+recording/*.mp4
+recording/*.webm
+recording/*.cast
+recording/.dryrun-logs/
+# Squad: ignore runtime state (logs, inbox, sessions)
+.squad/orchestration-log/
+.squad/log/
+.squad/decisions/inbox/
+.squad/sessions/
+# Squad: SubSquad activation file (local to this machine)
+.squad-workstream

@@ -6,7 +6,7 @@
 
 > Learn spec-driven development and agentic engineering in one focused hour.
 
-Pick **one** of the five scenarios below, watch the short video, and follow the matching scenario doc.
+Pick **one** of the six scenarios below, watch the short video, and follow the matching scenario doc.
 
 | # | Scenario | Tooling | Sample app | Guide |
 |---|---|---|---|---|
@@ -15,6 +15,7 @@ Pick **one** of the five scenarios below, watch the short video, and follow the 
 | 3 | Legacy Modernization | Spec Kit | [`examples/legacy-cobol-library`](examples/legacy-cobol-library) | [docs/scenario-3-speckit-cobol.md](docs/scenario-3-speckit-cobol.md) |
 | 4 | Personal Assistant | Copilot CLI + Squad + OpenSpec | _none, the squad creates it_ | [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md) |
 | 5 | ETL Pipeline (data) | Copilot CLI + Squad + Spec Kit | _none, the squad builds it_ | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
+| 6 | Angular → React Modernization | Copilot CLI + Squad + Spec Kit + Playwright | [`examples/angular-realworld-react`](examples/angular-realworld-react) | [docs/scenario-6-speckit-angular-react.md](docs/scenario-6-speckit-angular-react.md) |
 
 ## Common prerequisites (all scenarios)
 
@@ -139,6 +140,26 @@ https://github.com/user-attachments/assets/4317ecf4-5cca-4eb1-afa8-a43480293643
 
 → Follow [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md)
 
+---
+
+## Scenario 6 — Angular → React Modernization with Squad + Spec Kit
+
+Use **Copilot CLI** with the **Squad** agent to run the full **Spec Kit** lifecycle and modernize the **Angular RealWorld** app's frontend to **React** — same UI, frontend only — then validate it with **Playwright**.
+
+**Extra prereqs**
+
+- GitHub Copilot CLI signed in (`copilot --help`).
+- Squad: `npm install -g @bradygaster/squad-cli` (`squad doctor`).
+- Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git`.
+- Node.js 20.19+ and Playwright (MCP preconfigured; CLI backup `npm install -g playwright && npx playwright install chromium`).
+
+**Demo video**
+
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-6-angular-react.mp4" controls width="720"></video>
+
+→ Follow [docs/scenario-6-speckit-angular-react.md](docs/scenario-6-speckit-angular-react.md)
+
 Two small skills are included under `.github/skills/`. Copilot can use them when relevant; you do not have to invoke them manually.
 
 - [`frontend-design`](.github/skills/frontend-design/SKILL.md) — opinionated UI defaults for scenarios 1, 2, and 4.
@@ -158,11 +179,13 @@ Two small skills are included under `.github/skills/`. Copilot can use them when
 ├── .github/skills/       # Optional Copilot skills
 ├── .vscode/              # Editor + MCP config (Playwright)
 ├── .mcp.json             # MCP config for Copilot CLI
-├── docs/                 # 5 scenario guides (one per scenario)
+├── docs/                 # 6 scenario guides (one per scenario)
 ├── examples/
+│   ├── angular-realworld-react/ # Scenario 6 working folder (Angular→React)
 │   ├── bookshelf-app/        # Scenario 2 starter
+│   ├── etl-climate-pipeline/ # Scenario 5 starter (PostgreSQL ETL)
 │   └── legacy-cobol-library/ # Scenario 3 starter (COBOL)
-├── media/videos/         # 5 demo videos
+├── media/videos/         # demo videos
 └── scripts/              # Verification helper
 ```
 
