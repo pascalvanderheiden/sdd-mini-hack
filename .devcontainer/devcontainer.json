@@ -5,7 +5,11 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.12"
-    }
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/node/.local/bin"
   },
   "customizations": {
     "vscode": {
@@ -13,12 +17,14 @@
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "ms-playwright.playwright",
-        "broadcommfd.cobol-language-support"
+        "broadcommfd.cobol-language-support",
+        "atman-dev.openspec-for-copilot",
+        "alfredoperez.speckit-companion"
       ],
       "settings": {
         "chat.agent.enabled": true
       }
     }
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y gnucobol && npm --version && python3 --version && gh --version"
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
 }

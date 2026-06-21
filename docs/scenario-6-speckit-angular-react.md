@@ -19,7 +19,7 @@ See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
 Clone the Angular RealWorld app into the scenario folder. This is the **reference frontend** — your React port must match it screen-for-screen.
 
 ```bash
-cd examples/angular-realworld-react
+cd examples/scenario-6-angular-realworld-react
 git clone https://github.com/realworld-apps/angular-realworld-example-app.git angular-source
 ```
 
@@ -31,13 +31,13 @@ npm install
 npm start   # serves on http://localhost:4200
 ```
 
-Browse the app: home feed, sign in / sign up, article view, editor, profile, settings. These are the screens you'll reproduce in React. When done, `cd ..` back to `examples/angular-realworld-react`.
+Browse the app: home feed, sign in / sign up, article view, editor, profile, settings. These are the screens you'll reproduce in React. When done, `cd ..` back to `examples/scenario-6-angular-realworld-react`.
 
 > **Backend note:** RealWorld frontends use a hosted public API. You are modernizing the **frontend only** — do not build or change any backend.
 
 ## Step 1 — Initialize Spec Kit
 
-From the scenario folder (`examples/angular-realworld-react`):
+From the scenario folder (`examples/scenario-6-angular-realworld-react`):
 
 ```bash
 specify init .
@@ -115,7 +115,7 @@ Specs look good. Lead, kick off the implementation in one go following the Spec 
 As you complete each task, mark it done in specs/<feature-name>/tasks.md. When implementation finishes, write a short test report (Playwright tests run, pass/fail counts, screens covered) to specs/<feature-name>/test-report.md, and a short quickstart.md (in the example folder) with the exact commands to run the React app and the Playwright tests manually.
 ```
 
-The Implement-phase member orchestrates the core team (scaffolding, components, routing, API client, Playwright tests) to build `examples/angular-realworld-react/react-app/`, **check off the tasks in `tasks.md`**, and produce a short **`test-report.md`** plus a **`quickstart.md`**.
+The Implement-phase member orchestrates the core team (scaffolding, components, routing, API client, Playwright tests) to build `examples/scenario-6-angular-realworld-react/react-app/`, **check off the tasks in `tasks.md`**, and produce a short **`test-report.md`** plus a **`quickstart.md`**.
 
 ## Step 7 — Validate the React app
 

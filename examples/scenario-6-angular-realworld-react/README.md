@@ -14,7 +14,7 @@ See the full scenario guide: [../../docs/scenario-6-speckit-angular-react.md](..
 
 2. **Clone the source app** (Step 0), into this folder:
    ```bash
-   cd examples/angular-realworld-react
+   cd examples/scenario-6-angular-realworld-react
    git clone https://github.com/realworld-apps/angular-realworld-example-app.git angular-source
    ```
 

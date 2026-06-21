@@ -14,7 +14,7 @@ See the full scenario guide: [../../docs/scenario-5-speckit-etl-pipeline.md](../
 2. **Start the database** (Step 1):
    ```bash
    # Make sure Docker is running (Docker Desktop, or `colima start` on colima)
-   cd examples/etl-climate-pipeline
+   cd examples/scenario-5-etl-climate-pipeline
    docker-compose up -d
    ```
 

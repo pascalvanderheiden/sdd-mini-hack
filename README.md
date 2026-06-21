@@ -8,14 +8,16 @@
 
 Pick **one** of the six scenarios below, watch the short video, and follow the matching scenario doc.
 
-| # | Scenario | Tooling | Sample app | Guide |
-|---|---|---|---|---|
-| 1 | Greenfield Todo App | OpenSpec + Copilot Chat | _none, you create it_ | [docs/scenario-1-openspec-todo.md](docs/scenario-1-openspec-todo.md) |
-| 2 | Brownfield Feature | Copilot Plan Mode | [`examples/bookshelf-app`](examples/bookshelf-app) | [docs/scenario-2-plan-mode-bookshelf.md](docs/scenario-2-plan-mode-bookshelf.md) |
-| 3 | Legacy Modernization | Spec Kit | [`examples/legacy-cobol-library`](examples/legacy-cobol-library) | [docs/scenario-3-speckit-cobol.md](docs/scenario-3-speckit-cobol.md) |
-| 4 | Personal Assistant | Copilot CLI + Squad + OpenSpec | _none, the squad creates it_ | [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md) |
-| 5 | ETL Pipeline (data) | Copilot CLI + Squad + Spec Kit | _none, the squad builds it_ | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
-| 6 | Angular → React Modernization | Copilot CLI + Squad + Spec Kit + Playwright | [`examples/angular-realworld-react`](examples/angular-realworld-react) | [docs/scenario-6-speckit-angular-react.md](docs/scenario-6-speckit-angular-react.md) |
+| # | Scenario | Tooling | Guide |
+|---|---|---|---|
+| 1 | Greenfield Todo App | OpenSpec + Copilot Chat | [docs/scenario-1-openspec-todo.md](docs/scenario-1-openspec-todo.md) |
+| 2 | Brownfield Feature | Copilot Plan Mode | [docs/scenario-2-plan-mode-bookshelf.md](docs/scenario-2-plan-mode-bookshelf.md) |
+| 3 | Legacy Modernization | Spec Kit | [docs/scenario-3-speckit-cobol.md](docs/scenario-3-speckit-cobol.md) |
+| 4 | Personal Assistant | Copilot CLI + Squad + OpenSpec | [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md) |
+| 5 | ETL Pipeline (data) | Copilot CLI + Squad + Spec Kit | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
+| 6 | Angular → React Modernization | Copilot CLI + Squad + Spec Kit + Playwright | [docs/scenario-6-speckit-angular-react.md](docs/scenario-6-speckit-angular-react.md) |
+
+Each scenario has an `examples/scenario-N-…/` folder — the location you run it from. Some come with starter files; others contain only a README and are populated as you go.
 
 ## Common prerequisites (all scenarios)
 
@@ -59,7 +61,7 @@ Add a feature to the included **Bookshelf** app, then validate it through Playwr
 
 **Extra prereqs**
 
-- The sample app under `examples/bookshelf-app` (already in the repo, no install).
+- The sample app under `examples/scenario-2-bookshelf-app` (already in the repo, no install).
 
 **Demo video**
 
@@ -74,7 +76,7 @@ https://github.com/user-attachments/assets/3fe9613e-e51a-4692-af87-ffe3dd931c8f
 
 ## Scenario 3 — Legacy Modernization with Spec Kit (COBOL → Modern Stack)
 
-Run a small COBOL banking program, then use Spec Kit to specify, plan, task, and implement a modern rewrite.
+Clone a legacy **COBOL accounting system** as the source, then use Spec Kit to specify, plan, task, and implement a modern rewrite.
 
 **Extra prereqs**
 
@@ -181,10 +183,12 @@ Two small skills are included under `.github/skills/`. Copilot can use them when
 ├── .mcp.json             # MCP config for Copilot CLI
 ├── docs/                 # 6 scenario guides (one per scenario)
 ├── examples/
-│   ├── angular-realworld-react/ # Scenario 6 working folder (Angular→React)
-│   ├── bookshelf-app/        # Scenario 2 starter
-│   ├── etl-climate-pipeline/ # Scenario 5 starter (PostgreSQL ETL)
-│   └── legacy-cobol-library/ # Scenario 3 starter (COBOL)
+│   ├── scenario-1-openspec-todo/        # Scenario 1 (greenfield, from scratch)
+│   ├── scenario-2-bookshelf-app/        # Scenario 2 starter
+│   ├── scenario-3-legacy-cobol-library/ # Scenario 3 (clone COBOL source here)
+│   ├── scenario-4-cli-squad-assistant/  # Scenario 4 (greenfield, from scratch)
+│   ├── scenario-5-etl-climate-pipeline/ # Scenario 5 starter (PostgreSQL ETL)
+│   └── scenario-6-angular-realworld-react/ # Scenario 6 working folder (Angular→React)
 ├── media/videos/         # demo videos
 └── scripts/              # Verification helper
 ```

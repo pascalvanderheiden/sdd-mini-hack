@@ -1,0 +1,19 @@
+# Cloned source app (reference only)
+cobol-source/
+
+# Generated modern rewrite
+modern/
+
+# Build / dependency output
+node_modules/
+dist/
+build/
+
+examples/scenario-3-legacy-cobol-library/.DS_Store
+.DS_Store
+
+# Squad: ignore runtime state (logs, inbox, sessions)
+.squad/orchestration-log/
+.squad/log/
+.squad/decisions/inbox/
+.squad/sessions/

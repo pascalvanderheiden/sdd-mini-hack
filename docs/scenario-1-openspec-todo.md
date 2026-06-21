@@ -13,15 +13,16 @@ See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.
 - Node.js 20.19+.
 - OpenSpec: `npm install -g @fission-ai/openspec@latest`.
 
-## Step 1 — Create a clean workspace
+## Step 1 — Open the scenario folder
+
+This scenario runs from its example folder in the repo (everything you create stays scoped here):
 
 ```bash
-mkdir ~/sdd-todo
-cd ~/sdd-todo
+cd examples/scenario-1-openspec-todo
 code .
 ```
 
-Open a terminal in the new VS Code window for the next steps.
+Open a terminal in this folder for the next steps.
 
 ## Step 2 — Initialize OpenSpec
 

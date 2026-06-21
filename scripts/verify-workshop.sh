@@ -35,16 +35,12 @@ check .github/skills/legacy-cobol-explorer/SKILL.md
 
 echo ""
 echo "🔎 Sample apps"
-check examples/bookshelf-app/server.mjs
-check examples/bookshelf-app/public/index.html
-check examples/bookshelf-app/data/books.json
-check examples/legacy-cobol-library/cobol/ACCOUNT-REPORT.cob
-check examples/legacy-cobol-library/data/accounts.dat
-check examples/legacy-cobol-library/data/transactions.dat
-check examples/legacy-cobol-library/expected-output.txt
-check examples/legacy-cobol-library/run.sh
-check examples/etl-climate-pipeline/docker-compose.yml
-check examples/angular-realworld-react/README.md
+check examples/scenario-2-bookshelf-app/server.mjs
+check examples/scenario-2-bookshelf-app/public/index.html
+check examples/scenario-2-bookshelf-app/data/books.json
+check examples/scenario-3-legacy-cobol-library/README.md
+check examples/scenario-5-etl-climate-pipeline/docker-compose.yml
+check examples/scenario-6-angular-realworld-react/README.md
 
 echo ""
 echo "🔎 Videos"
@@ -57,7 +53,7 @@ check media/videos/scenario-6-angular-react.mp4
 
 echo ""
 echo "🔎 JSON validity"
-for f in .mcp.json .vscode/mcp.json .vscode/extensions.json .devcontainer/devcontainer.json examples/bookshelf-app/package.json examples/bookshelf-app/data/books.json; do
+for f in .mcp.json .vscode/mcp.json .vscode/extensions.json .devcontainer/devcontainer.json examples/scenario-2-bookshelf-app/package.json examples/scenario-2-bookshelf-app/data/books.json; do
   if node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" 2>/dev/null; then
     printf "  ✅ %s parses\n" "$f"
   else

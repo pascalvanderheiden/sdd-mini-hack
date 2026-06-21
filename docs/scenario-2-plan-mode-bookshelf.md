@@ -12,32 +12,62 @@ See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.
 - VS Code with GitHub Copilot + Copilot Chat signed in.
 - Node.js 20.19+.
 
-## Step 1 — Run the existing app
+## Step 1 — Open the scenario folder
+
+This scenario runs from its example folder in the repo:
 
 ```bash
-cd examples/bookshelf-app
+cd examples/scenario-2-bookshelf-app
+code .
+```
+
+Open a terminal in this folder for the next steps.
+
+## Step 2 — Generate Copilot instructions
+
+Give Copilot project context before you start. In VS Code, open the **Command Palette**
+(`Cmd/Ctrl+Shift+P`) and run **Chat: Generate Workspace Instructions File**. Copilot analyzes
+the folder and writes `.github/copilot-instructions.md`.
+
+> No command? Open **Copilot Chat → Agent mode** and ask:
+> ```text
+> Analyze this workspace and generate a .github/copilot-instructions.md that captures the
+> stack, structure, conventions, and how to run and test this app.
+> ```
+
+Review the generated file and tweak anything that's off — it's loaded automatically into every Copilot request.
+
+## Step 3 — Run the existing app
+
+```bash
 npm install
 npm start
 ```
 
 Open <http://localhost:4173>.
 
-Click around: list books, add a book, mark as **Read** / **Reading** / **Want to read**, delete a book. The app stores books in `examples/bookshelf-app/data/books.json`.
+Click around: list books, add a book, mark as **Read** / **Reading** / **Want to read**, delete a book. The app stores books in `data/books.json`.
 
-## Step 2 — Switch Copilot Chat to Plan Mode
+## Step 4 — Switch Copilot Chat to Plan Mode
+
+**Plan Mode** is a built-in GitHub Copilot Chat mode. Instead of editing files right away (like
+**Agent mode**), it researches your codebase and produces a step-by-step **implementation plan**
+for you to review and refine — no code is changed until you approve. It's ideal for brownfield
+work where you want to agree on the approach before touching existing code.
 
 In VS Code:
 
 1. Open **Copilot Chat**.
-2. Switch the mode dropdown from **Agent** to **Plan**.
-3. Make sure the workspace is `sdd-mini-hack` so Copilot can see `examples/bookshelf-app`.
+2. Switch the mode dropdown (top of the Chat view) from **Agent** to **Plan**.
+3. The workspace is this folder, so Copilot already sees the bookshelf app.
 
-## Step 3 — Ask for a plan (do not implement yet)
+## Step 5 — Ask for a plan (do not implement yet)
 
-Send this prompt in Plan Mode:
+> 📋 **Make sure the Copilot Chat mode dropdown still says _Plan_**, then send the prompt below.
+> In Plan Mode, Copilot replies with a plan to review — it will **not** edit any files yet.
 
 ```text
-Analyze examples/bookshelf-app. Do not change code yet.
+Analyze this bookshelf app (you're already in its folder). Do not change code yet.
 
 Feature request: "Reading progress"
 
@@ -59,7 +89,7 @@ Produce a short implementation plan with:
 
 Review the plan. Ask Copilot to shrink anything that feels too big.
 
-## Step 4 — Implement the approved plan
+## Step 6 — Implement the approved plan
 
 Switch Copilot Chat back to **Agent mode** and send:
 
@@ -70,7 +100,7 @@ Preserve existing data/books.json. After each step, tell me what changed and how
 
 Restart `npm start` if Copilot did not.
 
-## Step 5 — Validate with Playwright MCP
+## Step 7 — Validate with Playwright MCP
 
 In Copilot Chat (Agent mode):
 
@@ -91,7 +121,7 @@ Report pass/fail per step.
 
 - Add a "Currently reading" filter.
 - Show total pages read across all books.
-- Add a Playwright test file under `examples/bookshelf-app/tests/`.
+- Add a Playwright test file under `examples/scenario-2-bookshelf-app/tests/`.
 
 ## Troubleshooting
 

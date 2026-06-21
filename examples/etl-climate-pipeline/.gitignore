@@ -1,6 +1,0 @@
-data/*.csv
-.env
-__pycache__/
-*.pyc
-examples/etl-climate-pipeline/.DS_Store
-.DS_Store

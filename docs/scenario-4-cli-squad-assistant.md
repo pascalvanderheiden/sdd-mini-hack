@@ -15,12 +15,12 @@ See the consolidated prerequisites guide: [docs/prerequisites.md](prerequisites.
 - OpenSpec: `npm install -g @fission-ai/openspec@latest`.
 - `gh` CLI signed in (`gh auth status`).
 
-## Step 1 — Create a clean workspace
+## Step 1 — Open the scenario folder
+
+This scenario runs from its example folder in the repo (the Squad and OpenSpec artifacts stay scoped here):
 
 ```bash
-mkdir ~/sdd-assistant
-cd ~/sdd-assistant
-git init
+cd examples/scenario-4-cli-squad-assistant
 ```
 
 ## Step 2 — Initialize OpenSpec and Squad
@@ -109,7 +109,7 @@ If MCP is unavailable, run Playwright CLI as backup (`npx playwright test`) and 
 Open a second terminal:
 
 ```bash
-cd ~/sdd-assistant
+cd examples/scenario-4-cli-squad-assistant
 npm start
 ```
 

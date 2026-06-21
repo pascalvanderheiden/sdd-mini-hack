@@ -33,14 +33,14 @@ Both should return **HTTP 200** with CSV headers. If not, check network access o
 
 ## Step 1 — Stand up the target database
 
-The folder `examples/etl-climate-pipeline/` already has `docker-compose.yml` and `init.sql` (schema "climate" with tables: co2_emissions, population, country_metrics).
+The folder `examples/scenario-5-etl-climate-pipeline/` already has `docker-compose.yml` and `init.sql` (schema "climate" with tables: co2_emissions, population, country_metrics).
 
 Start the container:
 
 ```bash
 # Make sure Docker is running: start Docker Desktop, or on colima run `colima start`
 
-cd examples/etl-climate-pipeline
+cd examples/scenario-5-etl-climate-pipeline
 docker-compose up -d
 docker-compose ps
 pg_isready -h localhost -U etl -d climate_db
@@ -53,7 +53,7 @@ Connection string: `postgresql://etl:etl_workshop@localhost:5432/climate_db`
 Open a terminal and `cd` into the example folder (if you aren't already there from Step 1):
 
 ```bash
-cd examples/etl-climate-pipeline
+cd examples/scenario-5-etl-climate-pipeline
 ```
 
 Initialize Spec Kit **first** — it creates the `/speckit.*` commands and the speckit custom agent definitions in `.github/agents` that the Squad needs to reference:
@@ -150,7 +150,7 @@ Specs look good. Lead, kick off the implementation in one go following the Spec 
 As you complete each task, mark it done in specs/<feature-name>/tasks.md. When implementation finishes, write a short test report (tests run, pass/fail counts, row counts loaded per table) to specs/<feature-name>/test-report.md, and a short quickstart.md (in the example folder) with the exact commands to run and validate the pipeline manually.
 ```
 
-The Implement-phase member orchestrates the core team (database setup, pipeline code, tests) to build `examples/etl-climate-pipeline/pipeline.py`, load the data, **check off the tasks in `tasks.md`**, and produce a short **`test-report.md`** plus a **`quickstart.md`** for running and validating the solution yourself.
+The Implement-phase member orchestrates the core team (database setup, pipeline code, tests) to build `examples/scenario-5-etl-climate-pipeline/pipeline.py`, load the data, **check off the tasks in `tasks.md`**, and produce a short **`test-report.md`** plus a **`quickstart.md`** for running and validating the solution yourself.
 
 ## Step 8 — Validate the pipeline
 
