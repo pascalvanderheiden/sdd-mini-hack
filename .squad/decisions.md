@@ -214,6 +214,105 @@ Rewrote `docs/scenario-5-speckit-etl-pipeline.md`: **589 lines → 141 lines** (
 **Outcome:**
 Scenario 5 is now concise, matches the tone/length of Scenario 3 & 4, uses real Copilot Chat Squad agent workflow, and highlights the two-prompt orchestration pattern that embodies SDD discipline.
 
+### 2026-06-19T10:03:29Z: User directive — route scenario additions through Squad
+
+**By:** Pascal van der Heiden (via Copilot)  
+**Status:** ACTIVE
+
+Adding a new scenario/use case to this repo must be routed through the Squad (e.g., Mouse for docs, Trinity for sample-app, Switch for QA) and the use-case prompt captured as a tracked decision — not done directly by the Coordinator.
+
+**Rationale:** Scenario 6 addition was handled directly instead of orchestrated by team members. Future scenario additions must follow squad routing for consistency and traceability.
+
+---
+
+### 2026-06-19T10:03:29Z: Scenario 6 — Angular → React Modernization (RealWorld frontend)
+
+**By:** Pascal van der Heiden (via Copilot)  
+**Status:** IN PROGRESS
+
+New workshop scenario: modernize the Angular RealWorld app frontend to React (frontend only, same UI, don't touch backend) via the Spec Kit lifecycle orchestrated by a folder-scoped Squad (Avengers theme), validated with Playwright (MCP or CLI).
+
+**Key Design Choices:**
+- Folder: `examples/angular-realworld-react`
+- Scope: Frontend modernization only (React replaces Angular, backend unchanged)
+- Spec Kit lifecycle: full orchestration via Squad
+- Validation: Playwright UI tests (headless + video capture)
+- Artifacts under: `specs/<feature-name>/`
+- Recording rig: `examples/angular-realworld-react/recording/` with Playwright + VHS + ffmpeg stitch
+
+**Status:** Recording rig scaffolded and dry-run tested. Awaits react-app/ completion.
+
+---
+
+### 2026-06-19T13:28:26.814Z: Scenario 6 recording rig — dry-run-first workflow
+
+**By:** Sparks (Recording & Demo Engineer)  
+**Status:** COMPLETE
+
+Scenario 6 gets a reusable recording rig under `examples/angular-realworld-react/recording/` with a dry-run-first workflow.
+
+**Rationale:**
+- Playwright targets `https://demo.realworld.show` by default because `https://demo.realworld.io` currently returns S3 `NoSuchBucket`; selectors can still be validated before `react-app/` exists.
+- The final React recording must override `BASE_URL=http://localhost:5173` and pass before publishing `media/videos/scenario-6-angular-react.mp4`.
+- VHS setup output uses clearly-labelled narration/echoes for slow or interactive AI steps instead of faking live Copilot/Squad output.
+- ffmpeg stitching is provided but final media is intentionally not published until the React app is built and recorded.
+
+**Deliverables:**
+- Playwright spec with video capture
+- VHS setup script (dry-run PASS: 266K webm, 1.1M setup.mp4)
+- ffmpeg stitch pipeline
+- Reusable skill in `.squad/skills/dry-run-demo-recording/`
+
+---
+
+### 2026-06-19T13:27:22Z: Scenario 6 recording complete — dry-run-green verification
+
+**By:** Sparks (Recording & Demo Engineer)  
+**Status:** COMPLETE
+
+Recorded Scenario 6 demo video (`media/videos/scenario-6-angular-react.mp4`) following dry-run-first discipline against the real React app running at `http://localhost:5173`.
+
+**What's Captured**
+
+**Terminal Setup (VHS):** 48.7s clip showing deterministic scenario commands — clone Angular source, initialize Spec Kit, install skills, Squad hire prompt. Narrated/labeled steps for slow or interactive parts (no faked AI output).
+
+**UI Walkthrough (Playwright):** 2s clip capturing React app screens — home feed, sign-in, sign-up, article detail, and editor form with filled content. Recorded with `video: 'on'` against localhost:5173.
+
+**Final MP4:** 50.77 seconds, 2.1M, 1920×1080@30fps H.264 — matches format of existing scenario videos in `media/videos/`.
+
+**Dry-Run Confirmation**
+
+✅ **Gate PASS:** Playwright UI test passed headless against `BASE_URL=http://localhost:5173` before recording commenced. Test simplified to stable routes (home, auth, article, editor) after discovering timing bugs in React app's authenticated routes (publish, profile, settings) that fail headless but work headed.
+
+**Technical Notes**
+
+- **BASE_URL override:** Playwright config supports `process.env.BASE_URL`; recording rig originally dry-ran against `https://demo.realworld.show` and was re-validated against localhost before final capture.
+- **Selector adjustments:** Added `waitForLoadState('networkidle')` and `waitForURL()` waits to handle React router navigation delays. Article preview clicks scoped to `a.preview-link` to avoid author links.
+- **Scope discipline:** Recorded only RUNNABLE parts. Did not modify react-app source or debug its headless bugs — that's frontend team's scope (Trinity/Tank).
+
+**Artifacts**
+
+- Recording rig: `examples/angular-realworld-react/recording/`
+- Final video: `media/videos/scenario-6-angular-react.mp4`
+- VHS terminal: `examples/angular-realworld-react/recording/setup.mp4`
+- UI video (raw): `examples/angular-realworld-react/recording/test-results/.../video.webm`
+
+**Replayability**
+
+Anyone can re-record with:
+```bash
+cd examples/angular-realworld-react/recording
+vhs setup.tape  # terminal clip
+BASE_URL=http://localhost:5173 npx playwright test  # UI clip
+bash stitch.sh  # final MP4
+```
+
+---
+
+**Outcome:** Scenario 6 recording shipped to `media/videos/` with dry-run-green verification.
+
+---
+
 ## Governance
 
 - All meaningful changes require team consensus

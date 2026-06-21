@@ -17,13 +17,7 @@
 | 🔧 Tank | Tooling & Skills Engineer | `.squad/agents/tank/charter.md` | active |
 | 📝 Mouse | Technical Writer / DevRel | `.squad/agents/mouse/charter.md` | active |
 | 🧪 Switch | Tester / QA | `.squad/agents/switch/charter.md` | active |
-| 📜 Morpheus | Constitution Architect — `speckit.constitution` | `.squad/agents/morpheus/charter.md` | active |
-| 🔮 Oracle | Requirements Analyst — `speckit.specify` + `speckit.clarify` | `.squad/agents/oracle/charter.md` | active |
-| 🗺️ Niobe | Technical Planner — `speckit.plan` | `.squad/agents/niobe/charter.md` | active |
-| 🧩 Dozer | Task Engineer — `speckit.tasks` + `speckit.analyze` | `.squad/agents/dozer/charter.md` | active |
-| ✅ Cypher | Quality Gatekeeper — `speckit.checklist` | `.squad/agents/cypher/charter.md` | active |
-| 🛠️ Seraph | Implementation Orchestrator — `speckit.implement` | `.squad/agents/seraph/charter.md` | active |
-| 🧰 Link | Skills Manager — `find-skills` / `skill-creator` | `.squad/agents/link/charter.md` | active |
+| 🎬 Sparks | Recording & Demo Engineer | `.squad/agents/sparks/charter.md` | active |
 | 📋 Scribe | Session Logger | `.squad/agents/scribe/charter.md` | active |
 | 🔄 Ralph | Work Monitor | — | monitor |
 

@@ -12,32 +12,14 @@ How to decide who handles what.
 | Scenario docs & guides | 📝 Mouse | `docs/scenario-N-*.md`, README, prerequisites, walkthrough prose |
 | Code & content review | 🏗️ Neo | Review PRs, check accuracy, gate quality before shipping |
 | Testing & validation | 🧪 Switch | Validate scenarios end to end, Playwright MCP/CLI, `verify-workshop.sh`, edge cases |
+| Demo / screen recordings | 🎬 Sparks | Record scenario demos to `media/videos/`, Playwright video capture, VHS terminal tapes, ffmpeg stitching, dry-run-then-record |
 | Scope & priorities | 🏗️ Neo | What use case to add next, trade-offs, decisions |
-
-## Spec Kit Lifecycle Orchestration (Scenario 5 — ETL Pipeline)
-
-Neo (Lead) orchestrates the full Spec Kit lifecycle by invoking each phase member in order. Each member produces the artifact for the speckit prompt they mirror. The implement member (Seraph) orchestrates the CORE team to build.
-
-| Order | Phase / Spec Kit command | Owner | Produces |
-|-------|--------------------------|-------|----------|
-| 0 | Setup — `specify init`, Docker/Postgres, prereqs | 🔧 Tank | `.specify/`, `docker-compose.yml`, `init.sql` |
-| 1 | `speckit.constitution` | 📜 Morpheus | constitution |
-| 2 | `speckit.specify` + `speckit.clarify` | 🔮 Oracle | spec + clarifications |
-| 3 | `speckit.plan` | 🗺️ Niobe | technical plan |
-| 4 | `speckit.tasks` + `speckit.analyze` | 🧩 Dozer | task list + analysis |
-| 5 | `speckit.checklist` (readiness gate) | ✅ Cypher | quality checklist |
-| 6 | Skills provisioning (`find-skills` / `skill-creator`) | 🧰 Link | needed skills available |
-| 7 | `speckit.implement` (orchestrates core team) | 🛠️ Seraph → Tank/Trinity/Switch | working pipeline |
-| 8 | End-to-end validation | 🧪 Switch | verified data in PostgreSQL |
-| 9 | Scenario documentation | 📝 Mouse | `docs/scenario-5-*.md` |
-
-**Rules for this lifecycle:**
-1. Phases run in order; each phase reads the upstream artifacts. Neo gates each handoff.
-2. Cypher's checklist is a hard gate — Seraph does NOT start implementation until it passes.
-3. Link provisions skills AFTER the checklist gate and BEFORE Seraph implements.
-4. During implement, Seraph delegates: Tank (infra/tooling), Trinity (pipeline code), Switch (tests). Seraph never forces all the work onto one agent.
 | Async issue work (bugs, tests, small features) | @copilot 🤖 | Well-defined tasks matching capability profile |
 | Session logging | Scribe | Automatic — never needs routing |
+
+## Spec Kit Lifecycle (scenario execution)
+
+The root squad **builds** scenarios; it does not run a scenario's Spec Kit lifecycle. Each scenario that requires speckit execution (constitution → specify → plan → tasks → analyze → checklist → implement) hires its own **folder-scoped squad** under `examples/<scenario>/.squad/`, themed per scenario. Keep execution agents out of the root maintainer squad.
 
 ## Issue Routing
 
