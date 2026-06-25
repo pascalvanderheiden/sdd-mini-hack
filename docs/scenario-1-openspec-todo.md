@@ -32,14 +32,6 @@ openspec init
 
 When prompted **"Which AI tools do you use?"**, select **GitHub Copilot**.
 
-Verify:
-
-```bash
-ls openspec
-```
-
-You should see `project.md`, `AGENTS.md`, and supporting folders.
-
 ## Step 3 — Create the proposal
 
 Open **Copilot Chat → Agent mode** and send:
