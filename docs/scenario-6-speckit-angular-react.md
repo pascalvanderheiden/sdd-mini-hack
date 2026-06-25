@@ -10,6 +10,7 @@ Execute the **complete Spec Kit lifecycle** orchestrated by **Squad** to moderni
 See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
 - GitHub Copilot CLI signed in: `brew install --cask copilot-cli` (macOS) or `npm install -g @github/copilot@latest`.
 - Node.js 20.19+ (`node --version`).
+- **Python 3.12+ & uv** (Spec Kit installs via `uv tool install`): `curl -LsSf https://astral.sh/uv/install.sh | sh` (macOS/Linux) or `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"` (Windows). Restart your terminal, then `uv --version`.
 - Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` & `specify check`
 - **Squad CLI**: `npm install -g @bradygaster/squad-cli` (`squad doctor`).
 - **Playwright** — MCP is preconfigured (`.mcp.json` / `.vscode/mcp.json`). CLI backup: `npm install -g playwright && npx playwright install chromium`.
@@ -153,6 +154,7 @@ UI matches and the Playwright suite passes? Validation complete.
 
 ## Troubleshooting
 
+- **`uv` not found / Spec Kit install fails** → install uv first: `curl -LsSf https://astral.sh/uv/install.sh | sh` (Windows: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`), restart the terminal, then re-run the Spec Kit install. Needs Python 3.12+.
 - **`specify` not found** → `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` and restart terminal.
 - **Squad agent not in picker** → Ensure `.github/agents/squad.agent.md` exists.
 - **No speckit members hired** → Run `specify init .` (Step 1) **before** hiring the squad so `.github/agents/speckit.*.agent.md` exist.
