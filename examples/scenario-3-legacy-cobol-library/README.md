@@ -35,7 +35,7 @@ that preserves its behavior.
    ```
    Try each menu option and note the outputs. When done, `cd ..` back to this folder.
 
-5. **Run the Spec Kit lifecycle.** Follow the scenario guide: `specify init .`, then
+5. **Run the Spec Kit lifecycle.** Follow the scenario guide: `specify init --here --ai copilot`, then
    `/speckit.constitution` → `/speckit.specify` → `/speckit.plan` → `/speckit.tasks` →
    `/speckit.implement`. The modern rewrite is produced under `modern/`.
 
@@ -49,7 +49,7 @@ Created by you during the scenario:
 - `cobol-source/` — the cloned legacy COBOL accounting system (reference only)
 - `modern/` — the new modern rewrite the team builds
 - `specs/<feature-name>/` — Spec Kit artifacts (constitution, spec, plan, tasks)
-- `.specify/` — Spec Kit scaffolding (from `specify init .`)
+- `.specify/` — Spec Kit scaffolding (from `specify init --here --ai copilot`)
 
 ## Scope
 
