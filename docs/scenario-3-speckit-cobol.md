@@ -33,22 +33,7 @@ code .
 
 Open a terminal in this folder for the next steps.
 
-## Step 2 — Generate Copilot instructions
-
-Give Copilot project context before you start. In VS Code, open the **Command Palette**
-(`Cmd/Ctrl+Shift+P`) and run **Chat: Generate Workspace Instructions File**. Copilot analyzes
-the folder and writes `.github/copilot-instructions.md`.
-
-> No command? Open **Copilot Chat → Agent mode** and ask:
-> ```text
-> Analyze this workspace and generate a .github/copilot-instructions.md that captures the
-> stack, structure, conventions, and how to run and test this app.
-> ```
-
-Review the generated file — it's loaded automatically into every Copilot request. (Run this
-again after Step 3 once the source app is cloned, so the instructions capture the COBOL code.)
-
-## Step 3 — Get the source app (the behavior you must preserve)
+## Step 2 — Get the source app (the behavior you must preserve)
 
 Clone the legacy COBOL accounting system into the scenario folder. This is the **reference
 program** — your modern rewrite must reproduce its operations.
@@ -63,6 +48,22 @@ The source is three COBOL programs:
 - `data.cob` — stores the account balance.
 
 It also ships a `TESTPLAN.md` describing the business rules — useful input for the spec.
+
+## Step 3 — Generate Copilot instructions
+
+Now that the source app is cloned, give Copilot project context. In VS Code, open the
+**Command Palette** (`Cmd/Ctrl+Shift+P`) and run **Chat: Generate Workspace Instructions File**.
+Copilot analyzes the folder — including the COBOL code — and writes
+`.github/copilot-instructions.md`.
+
+> No command? Open **Copilot Chat → Agent mode** and ask:
+> ```text
+> Analyze this workspace and generate a .github/copilot-instructions.md that captures the
+> stack, structure, conventions, and how to run and test this app.
+> ```
+
+Review the generated file — it's loaded automatically into every Copilot request, so it now
+captures the COBOL code you just cloned.
 
 ## Step 4 — Run the legacy COBOL app
 
