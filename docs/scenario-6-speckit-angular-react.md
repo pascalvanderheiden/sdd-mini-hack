@@ -10,6 +10,7 @@ Execute the **complete Spec Kit lifecycle** orchestrated by **Squad** to moderni
 See [docs/prerequisites.md](prerequisites.md). Key for this scenario:
 - GitHub Copilot CLI signed in: `brew install --cask copilot-cli` (macOS) or `npm install -g @github/copilot@latest`.
 - Node.js 20.19+ (`node --version`).
+- **Python 3.12+ & uv** (Spec Kit installs via `uv tool install`): `curl -LsSf https://astral.sh/uv/install.sh | sh` (macOS/Linux) or `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"` (Windows). Restart your terminal, then `uv --version`.
 - Spec Kit: `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` & `specify check`
 - **Squad CLI**: `npm install -g @bradygaster/squad-cli` (`squad doctor`).
 - **Playwright** — MCP is preconfigured (`.mcp.json` / `.vscode/mcp.json`). CLI backup: `npm install -g playwright && npx playwright install chromium`.
@@ -20,8 +21,16 @@ Clone the Angular RealWorld app into the scenario folder. This is the **referenc
 
 ```bash
 cd examples/scenario-6-angular-realworld-react
-git clone https://github.com/realworld-apps/angular-realworld-example-app.git angular-source
+git clone --recurse-submodules https://github.com/realworld-apps/angular-realworld-example-app.git angular-source
 ```
+
+> **Submodule required:** the Angular app pulls its **theme/styling from a git submodule** (`realworld`, referenced by `angular.json` as `realworld/assets/theme/styles.css`). `--recurse-submodules` fetches it during the clone. If you already cloned **without** it (the app will look unstyled), initialize it now:
+>
+> ```bash
+> cd angular-source
+> git submodule update --init --recursive
+> cd ..
+> ```
 
 Optionally run it to see the target UI (it talks to the public RealWorld API):
 
@@ -145,9 +154,11 @@ UI matches and the Playwright suite passes? Validation complete.
 
 ## Troubleshooting
 
+- **`uv` not found / Spec Kit install fails** → install uv first: `curl -LsSf https://astral.sh/uv/install.sh | sh` (Windows: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`), restart the terminal, then re-run the Spec Kit install. Needs Python 3.12+.
 - **`specify` not found** → `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` and restart terminal.
 - **Squad agent not in picker** → Ensure `.github/agents/squad.agent.md` exists.
 - **No speckit members hired** → Run `specify init .` (Step 1) **before** hiring the squad so `.github/agents/speckit.*.agent.md` exist.
+- **Angular app unstyled / missing theme** → the `realworld` submodule wasn't initialized. From `angular-source`, run `git submodule update --init --recursive`.
 - **Angular app won't start** → use Node 20.19+, delete `angular-source/node_modules`, re-run `npm install`. Running the source is optional — the cloned code is enough reference.
 - **Playwright browsers missing** → `npx playwright install chromium`.
 - **Port already in use** → Vite picks the next free port; check the terminal for the actual URL.

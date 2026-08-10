@@ -157,6 +157,8 @@ Use **Copilot CLI** with the **Squad** agent to run the full **Spec Kit** lifecy
 
 **Demo video**
 
+https://github.com/user-attachments/assets/3b11f5a8-1d03-4a7d-8bc4-36196ca4f930
+
 <!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
 <video src="media/videos/scenario-6-angular-react.mp4" controls width="720"></video>
 
