@@ -69,3 +69,14 @@
 | Spec Kit CLI | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` |
 | Playwright CLI (backup) | `npm install -g playwright && npx playwright install chromium` | `npm install -g playwright; npx playwright install chromium` |
 
+### Scenario 7: Shareable Balloon Message with Copilot and Wayfinder SDD
+
+| Requirement | macOS install command | Windows install command |
+|---|---|---|
+| Issue tracker | GitHub Issues recommended; local files and GitLab are also supported | GitHub Issues recommended; local files and GitLab are also supported |
+| Scenario repository | Fork the workshop repository, or create a dedicated repository with `gh repo create` | Fork the workshop repository, or create a dedicated repository with `gh repo create` |
+| GitHub Copilot client | `brew install --cask copilot-cli`, or install the [Desktop App for macOS](https://gh.io/copilot-app-mac) ([installation guide](https://github.com/features/ai/github-app)) | `npm install -g @github/copilot@latest`, or install the [Desktop App for Windows](https://gh.io/copilot-app-win64) ([installation guide](https://github.com/features/ai/github-app)) |
+| Matt Pocock skills | `npx skills@latest add mattpocock/skills` | `npx skills@latest add mattpocock/skills` |
+| GitHub CLI | `brew install gh && gh auth login` | `winget install -e --id GitHub.cli; gh auth login` |
+| Node.js 20.19+ | `brew install node@20` | `winget install -e --id OpenJS.NodeJS.LTS` |
+| Playwright CLI (backup) | `npm install -g playwright && npx playwright install chromium` | `npm install -g playwright; npx playwright install chromium` |
