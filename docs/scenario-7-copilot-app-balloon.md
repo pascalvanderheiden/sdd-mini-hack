@@ -36,16 +36,13 @@ Enable GitHub Issues on the fork if needed. This option preserves the complete w
 
 ### Option B — Create a dedicated repository
 
-In your terminal, first browse to the folder where you want to create the project. Then download the Scenario 7 instructions directly from the workshop repository:
+In your terminal, first browse to the folder where you want to create the project. Then create and publish an empty repository:
 
 ```bash
 mkdir balloon-message
-curl -L https://raw.githubusercontent.com/pascalvanderheiden/sdd-mini-hack/main/docs/scenario-7-copilot-app-balloon.md \
-  -o balloon-message/README.md
 cd balloon-message
 git init -b main
-git add README.md
-git commit -m "Add Scenario 7 instructions"
+git commit --allow-empty -m "Initialize Balloon project"
 gh repo create balloon-message --public --source=. --remote=origin --push
 code .
 ```
