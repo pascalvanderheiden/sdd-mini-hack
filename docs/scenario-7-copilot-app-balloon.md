@@ -159,21 +159,25 @@ examples/scenario-7-balloon-message/
 
 The exact internal module layout may differ. The API, UX, accessibility, and lifecycle contracts must not. Review the automatic code-review findings and confirm blocking issues were fixed.
 
-## Step 8 — Validate manually
+## Step 8 — Create and merge the pull request
 
-Start the generated app using the command documented by the implementation, typically:
+After Fleet finishes, create one pull request for the completed Balloon implementation. Link the generated specification and connect the complete issue chain in the pull request body with closing references:
 
-```bash
-npm install
-npm start
+```text
+Closes #<wayfinder-map-issue>
+Closes #<wayfinder-child-issue-1>
+Closes #<wayfinder-child-issue-2>
+Closes #<implementation-issue-1>
+Closes #<implementation-issue-2>
 ```
 
-Run the generated suites:
+Add a `Closes` line for every map, decision, specification, and implementation issue created during the scenario. GitHub links them to the pull request and closes any still-open issues when the pull request merges.
 
-```bash
-npm run test:api
-npm run test:e2e
-```
+Review the pull request, wait for checks and the automatic code review to pass, then merge it.
+
+## Step 9 — Run and validate
+
+The completed implementation tells you exactly how to run the application and its tests. Follow those generated instructions rather than assuming specific commands or script names.
 
 Manual checklist:
 
