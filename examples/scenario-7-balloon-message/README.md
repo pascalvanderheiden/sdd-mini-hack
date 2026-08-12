@@ -33,7 +33,7 @@ This is a greenfield scenario. The folder starts with only this README; Copilot 
 
    Include `setup-matt-pocock-skills`, `wayfinder`, `to-spec`, `to-ticket`, `implement`, and `code-review`. Run `/setup-matt-pocock-skills` once and choose GitHub Issues.
 
-4. Open the scenario workspace in [GitHub Copilot Desktop](https://github.com/features/ai/github-app) ([macOS installer](https://gh.io/copilot-app-mac), [Windows installer](https://gh.io/copilot-app-win64)) or GitHub Copilot CLI.
+4. In [GitHub Copilot Desktop](https://github.com/features/ai/github-app) ([macOS installer](https://gh.io/copilot-app-mac), [Windows installer](https://gh.io/copilot-app-win64)), select **Add session** → **Local folder or repository**, then select the scenario folder you just prepared. Alternatively, start GitHub Copilot CLI from that folder.
 
 5. Follow the canonical guide and run the workflow in order:
 

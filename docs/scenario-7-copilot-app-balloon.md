@@ -49,13 +49,7 @@ code .
 
 This creates a public repository. Replace `--public` with `--private` or `--internal` if needed. Enable GitHub Issues if they are not already available.
 
-In either option, use the VS Code terminal in the scenario workspace for the remaining setup commands. Confirm the remote and Issues access:
-
-```bash
-git remote -v
-gh repo view --web
-gh issue list --limit 1
-```
+In either option, use the VS Code terminal in the scenario workspace for the remaining setup commands.
 
 ## Step 2 — Install and configure Matt Pocock's skills
 
@@ -67,7 +61,15 @@ npx skills@latest add mattpocock/skills
 
 In the installer, include `setup-matt-pocock-skills`, `wayfinder`, `to-spec`, `to-ticket`, `implement`, and `code-review`, and install them for the Copilot client you will use.
 
-Start Copilot CLI or a Desktop App session for the repository, then run:
+To use the **GitHub Copilot Desktop App**:
+
+1. Open the app and select **Add session**.
+2. Choose **Local folder or repository**.
+3. Select the scenario folder from your fork, or the `balloon-message` folder you just created.
+
+To use **GitHub Copilot CLI**, open it from that same folder.
+
+In the new Desktop App or CLI session, run:
 
 ```text
 /setup-matt-pocock-skills
