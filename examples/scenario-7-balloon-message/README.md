@@ -39,7 +39,8 @@ This is a greenfield scenario. The folder starts with only this README; Copilot 
 
    ```text
    /wayfinder
-   /to-spec
+   /wayfinder <each-child-issue-link>
+   /to-spec <wayfinder-map-link>
    /to-ticket
    /implement
    ```

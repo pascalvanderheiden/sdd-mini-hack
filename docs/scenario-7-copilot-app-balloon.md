@@ -90,7 +90,19 @@ Recipient opens the link without an account and reveals the Message through an
 animated balloon experience.
 ```
 
-Wayfinder creates a `wayfinder:map` issue and child decision tickets. Resolve the frontier tickets one at a time by running `/wayfinder` with the map URL until the route to the specification is clear. Keep these decisions:
+Wayfinder creates a `wayfinder:map` issue and child decision tickets.
+
+## Step 4 — Resolve every Wayfinder issue
+
+Open each child issue created by the map and run Wayfinder with that issue link:
+
+```text
+/wayfinder <issue-link>
+```
+
+Depending on the ticket, Wayfinder may guide a research task, a grilling conversation, or a prototype. Repeat this for every issue until all decision tickets are resolved and the map's route is clear.
+
+Keep these decisions:
 
 - Canonical terms are **Balloon**, **Sender**, **Recipient**, **Message**, and **Share Link**.
 - Sender name, Recipient name, Message, color, creation time, and expiry time are stored.
@@ -101,17 +113,17 @@ Wayfinder creates a `wayfinder:map` issue and child decision tickets. Resolve th
 - `CONTEXT.md` contains the glossary.
 - ADR-0001 records the seven-day reusable-link decision.
 
-## Step 4 — Convert decisions into a specification
+## Step 5 — Convert the map into a specification
 
-Send:
+Run `/to-spec` with the resolved Wayfinder map issue link:
 
 ```text
-/to-spec
+/to-spec <wayfinder-map-link>
 ```
 
-The skill uses the resolved Wayfinder context. Review the generated specification, `CONTEXT.md`, and ADR-0001 before continuing.
+Review the generated specification, `CONTEXT.md`, and ADR-0001 before continuing.
 
-## Step 5 — Create the implementation GitHub Issue
+## Step 6 — Create the implementation GitHub Issue
 
 Send:
 
@@ -121,7 +133,7 @@ Send:
 
 The skill converts the current specification into an implementation issue. Open it and verify that another developer could implement it without the chat history.
 
-## Step 6 — Implement from the issue
+## Step 7 — Implement from the issue
 
 Open the issue in a new Copilot CLI or Desktop App coding session. Ask the agent to implement only inside this scenario folder:
 
@@ -147,7 +159,7 @@ examples/scenario-7-balloon-message/
 
 The exact internal module layout may differ. The API, UX, accessibility, and lifecycle contracts must not. Review the automatic code-review findings and confirm blocking issues were fixed.
 
-## Step 7 — Validate manually
+## Step 8 — Validate manually
 
 Start the generated app using the command documented by the implementation, typically:
 
