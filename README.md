@@ -181,7 +181,7 @@ Use **GitHub Copilot CLI or the GitHub Copilot Desktop App**, **GitHub Issues**,
 
 **Demo video**
 
-`DEMO_VIDEO_URL_PLACEHOLDER`
+https://www.youtube.com/watch?v=F3lL98Pj90o&t=3s
 
 → Follow [docs/scenario-7-copilot-app-balloon.md](docs/scenario-7-copilot-app-balloon.md)
 

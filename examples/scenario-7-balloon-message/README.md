@@ -76,7 +76,7 @@ This is a greenfield scenario. The folder starts with only this README; Copilot 
 - The workshop uses GitHub Issues; local-file and GitLab tracker variants are supported but not covered here.
 - Keep all generated files inside this folder.
 - No accounts, moderation, rate limiting, analytics, delivery integrations, or production hosting.
-- The demo-video URL remains a placeholder until a recording is available.
+- Demo video: [Watch Scenario 7 on YouTube](https://www.youtube.com/watch?v=F3lL98Pj90o&t=3s).
 
 ## Validation
 
