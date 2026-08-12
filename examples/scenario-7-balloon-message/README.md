@@ -39,13 +39,13 @@ This is a greenfield scenario. The folder starts with only this README; Copilot 
 
    ```text
    /wayfinder
-   /wayfinder <each-child-issue-link>
-   /to-spec <wayfinder-map-link>
+   /wayfinder #<each-child-issue>
+   /to-spec #<wayfinder-map-issue>
    /to-ticket
-   /implement
+   /fleet /implement #<issue-1> #<issue-2> #<issue-3>
    ```
 
-   `/implement` invokes `/code-review` automatically.
+   In the Desktop App, type `#` to select issues. Fleet implements them in parallel, and `/implement` invokes `/code-review` automatically.
 
 6. Keep the agreed contract:
 

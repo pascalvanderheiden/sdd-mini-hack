@@ -94,13 +94,13 @@ Wayfinder creates a `wayfinder:map` issue and child decision tickets.
 
 ## Step 4 — Resolve every Wayfinder issue
 
-Open each child issue created by the map and run Wayfinder with that issue link:
+In the GitHub Copilot Desktop App, type `#` to search for and select each child issue created by the map, then run:
 
 ```text
-/wayfinder <issue-link>
+/wayfinder #<selected-issue>
 ```
 
-Depending on the ticket, Wayfinder may guide a research task, a grilling conversation, or a prototype. Repeat this for every issue until all decision tickets are resolved and the map's route is clear.
+In Copilot CLI, paste the issue URL if the `#` picker is unavailable. Depending on the ticket, Wayfinder may guide a research task, a grilling conversation, or a prototype. Repeat this for every issue until all decision tickets are resolved and the map's route is clear.
 
 Keep these decisions:
 
@@ -115,15 +115,15 @@ Keep these decisions:
 
 ## Step 5 — Convert the map into a specification
 
-Run `/to-spec` with the resolved Wayfinder map issue link:
+Select the resolved Wayfinder map with `#` in the Desktop App, then run:
 
 ```text
-/to-spec <wayfinder-map-link>
+/to-spec #<wayfinder-map-issue>
 ```
 
-Review the generated specification, `CONTEXT.md`, and ADR-0001 before continuing.
+In Copilot CLI, use the map issue URL instead. Review the generated specification, `CONTEXT.md`, and ADR-0001 before continuing.
 
-## Step 6 — Create the implementation GitHub Issue
+## Step 6 — Create the implementation GitHub Issues
 
 Send:
 
@@ -131,17 +131,17 @@ Send:
 /to-ticket
 ```
 
-The skill converts the current specification into an implementation issue. Open it and verify that another developer could implement it without the chat history.
+The skill converts the current specification into implementation issues. Open them and verify that another developer could implement each one without the chat history.
 
-## Step 7 — Implement from the issue
+## Step 7 — Implement the issues with Fleet
 
-Open the issue in a new Copilot CLI or Desktop App coding session. Ask the agent to implement only inside this scenario folder:
+Open a new Copilot CLI or Desktop App coding session. Use Fleet to implement all generated issues in parallel. In the Desktop App, type `#` and select every implementation issue:
 
 ```text
-/implement
+/fleet /implement #<issue-1> #<issue-2> #<issue-3>
 ```
 
-The skill reads the issue and linked specification, implements the work, runs validation, and invokes `/code-review` automatically.
+In Copilot CLI, use the issue URLs if the `#` picker is unavailable. Fleet distributes the issues across agents; each `/implement` run reads its issue and linked specification, validates the work, and invokes `/code-review` automatically.
 
 Expected generated structure:
 
