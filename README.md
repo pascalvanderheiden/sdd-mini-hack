@@ -6,7 +6,7 @@
 
 > Learn spec-driven development and agentic engineering in one focused hour.
 
-Pick **one** of the six scenarios below, watch the short video, and follow the matching scenario doc.
+Pick **one** of the seven scenarios below, watch the short video, and follow the matching scenario doc.
 
 | # | Scenario | Tooling | Guide |
 |---|---|---|---|
@@ -16,6 +16,7 @@ Pick **one** of the six scenarios below, watch the short video, and follow the m
 | 4 | Personal Assistant | Copilot CLI + Squad + OpenSpec | [docs/scenario-4-cli-squad-assistant.md](docs/scenario-4-cli-squad-assistant.md) |
 | 5 | ETL Pipeline (data) | Copilot CLI + Squad + Spec Kit | [docs/scenario-5-speckit-etl-pipeline.md](docs/scenario-5-speckit-etl-pipeline.md) |
 | 6 | Angular → React Modernization | Copilot CLI + Squad + Spec Kit + Playwright | [docs/scenario-6-speckit-angular-react.md](docs/scenario-6-speckit-angular-react.md) |
+| 7 | Shareable Balloon Message | Copilot CLI/Desktop + GitHub Issues + Wayfinder | [docs/scenario-7-copilot-app-balloon.md](docs/scenario-7-copilot-app-balloon.md) |
 
 Each scenario has an `examples/scenario-N-…/` folder — the location you run it from. Some come with starter files; others contain only a README and are populated as you go.
 
@@ -164,9 +165,29 @@ https://github.com/user-attachments/assets/3b11f5a8-1d03-4a7d-8bc4-36196ca4f930
 
 → Follow [docs/scenario-6-speckit-angular-react.md](docs/scenario-6-speckit-angular-react.md)
 
+---
+
+## Scenario 7 — Shareable Balloon Message with Copilot and Wayfinder SDD
+
+Use **GitHub Copilot CLI or the GitHub Copilot Desktop App**, **GitHub Issues**, and Matt Pocock's Wayfinder process to turn a playful Balloon idea into a specification, implementation ticket, working app, and reviewed change.
+
+**Extra prereqs**
+
+- GitHub Issues are recommended for the workshop flow; Matt Pocock's skills can also use local files or GitLab.
+- Fork this repository, or create and push a dedicated Scenario 7 repository with the GitHub CLI.
+- GitHub Copilot CLI, or the [GitHub Copilot Desktop App](https://github.com/features/ai/github-app) for [macOS](https://gh.io/copilot-app-mac) or [Windows](https://gh.io/copilot-app-win64).
+- Matt Pocock's skills installed with `npx skills@latest add mattpocock/skills`.
+- Node.js 20.19+ and Playwright (MCP preconfigured; CLI backup `npm install -g playwright && npx playwright install chromium`).
+
+**Demo video**
+
+https://www.youtube.com/watch?v=F3lL98Pj90o&t=3s
+
+→ Follow [docs/scenario-7-copilot-app-balloon.md](docs/scenario-7-copilot-app-balloon.md)
+
 Two small skills are included under `.github/skills/`. Copilot can use them when relevant; you do not have to invoke them manually.
 
-- [`frontend-design`](.github/skills/frontend-design/SKILL.md) — opinionated UI defaults for scenarios 1, 2, and 4.
+- [`frontend-design`](.github/skills/frontend-design/SKILL.md) — opinionated UI defaults for scenarios 1, 2, 4, and 7.
 - [`legacy-cobol-explorer`](.github/skills/legacy-cobol-explorer/SKILL.md) — domain notes for the COBOL sample in scenario 3.
 
 ## Verify your setup
@@ -183,14 +204,15 @@ Two small skills are included under `.github/skills/`. Copilot can use them when
 ├── .github/skills/       # Optional Copilot skills
 ├── .vscode/              # Editor + MCP config (Playwright)
 ├── .mcp.json             # MCP config for Copilot CLI
-├── docs/                 # 6 scenario guides (one per scenario)
+├── docs/                 # 7 scenario guides (one per scenario)
 ├── examples/
 │   ├── scenario-1-openspec-todo/        # Scenario 1 (greenfield, from scratch)
 │   ├── scenario-2-bookshelf-app/        # Scenario 2 starter
 │   ├── scenario-3-legacy-cobol-library/ # Scenario 3 (clone COBOL source here)
 │   ├── scenario-4-cli-squad-assistant/  # Scenario 4 (greenfield, from scratch)
 │   ├── scenario-5-etl-climate-pipeline/ # Scenario 5 starter (PostgreSQL ETL)
-│   └── scenario-6-angular-realworld-react/ # Scenario 6 working folder (Angular→React)
+│   ├── scenario-6-angular-realworld-react/ # Scenario 6 working folder (Angular→React)
+│   └── scenario-7-balloon-message/         # Scenario 7 greenfield working folder
 ├── media/videos/         # demo videos
 └── scripts/              # Verification helper
 ```

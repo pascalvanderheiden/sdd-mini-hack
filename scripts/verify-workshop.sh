@@ -20,6 +20,7 @@ check docs/scenario-3-speckit-cobol.md
 check docs/scenario-4-cli-squad-assistant.md
 check docs/scenario-5-speckit-etl-pipeline.md
 check docs/scenario-6-speckit-angular-react.md
+check docs/scenario-7-copilot-app-balloon.md
 
 echo ""
 echo "🔎 MCP and editor config"
@@ -41,6 +42,7 @@ check examples/scenario-2-bookshelf-app/data/books.json
 check examples/scenario-3-legacy-cobol-library/README.md
 check examples/scenario-5-etl-climate-pipeline/docker-compose.yml
 check examples/scenario-6-angular-realworld-react/README.md
+check examples/scenario-7-balloon-message/README.md
 
 echo ""
 echo "🔎 Videos"
