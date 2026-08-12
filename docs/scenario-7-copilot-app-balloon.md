@@ -36,12 +36,14 @@ Enable GitHub Issues on the fork if needed. This option preserves the complete w
 
 ### Option B — Create a dedicated repository
 
-From the root of a local workshop clone, copy this guide into a new folder, initialize Git, and publish it:
+From the root of a local workshop clone, remember its path. Then browse to the parent folder where you want to create the project:
 
 ```bash
-mkdir ../balloon-message
-cp docs/scenario-7-copilot-app-balloon.md ../balloon-message/README.md
-cd ../balloon-message
+WORKSHOP_ROOT="$(git rev-parse --show-toplevel)"
+cd /path/to/your/projects
+mkdir balloon-message
+cp "$WORKSHOP_ROOT/docs/scenario-7-copilot-app-balloon.md" balloon-message/README.md
+cd balloon-message
 git init -b main
 git add README.md
 git commit -m "Add Scenario 7 instructions"
