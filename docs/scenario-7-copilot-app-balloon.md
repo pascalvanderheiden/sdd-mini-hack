@@ -36,13 +36,12 @@ Enable GitHub Issues on the fork if needed. This option preserves the complete w
 
 ### Option B — Create a dedicated repository
 
-From the root of a local workshop clone, remember its path. Then browse to the parent folder where you want to create the project:
+In your terminal, first browse to the folder where you want to create the project. Then download the Scenario 7 instructions directly from the workshop repository:
 
 ```bash
-WORKSHOP_ROOT="$(git rev-parse --show-toplevel)"
-cd /path/to/your/projects
 mkdir balloon-message
-cp "$WORKSHOP_ROOT/docs/scenario-7-copilot-app-balloon.md" balloon-message/README.md
+curl -L https://raw.githubusercontent.com/pascalvanderheiden/sdd-mini-hack/main/docs/scenario-7-copilot-app-balloon.md \
+  -o balloon-message/README.md
 cd balloon-message
 git init -b main
 git add README.md
