@@ -52,6 +52,7 @@ check media/videos/scenario-3-speckit-legacy-modernization.mp4
 check media/videos/scenario-4-squad-cli.mp4
 check media/videos/scenario-5-cli-etl-pipeline.mp4
 check media/videos/scenario-6-angular-react.mp4
+check media/videos/scenario-7-balloon-message.mp4
 
 echo ""
 echo "🔎 JSON validity"

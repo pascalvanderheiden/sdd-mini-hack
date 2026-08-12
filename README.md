@@ -183,6 +183,9 @@ Use **GitHub Copilot CLI or the GitHub Copilot Desktop App**, **GitHub Issues**,
 
 https://www.youtube.com/watch?v=F3lL98Pj90o&t=3s
 
+<!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
+<video src="media/videos/scenario-7-balloon-message.mp4" controls width="720"></video>
+
 → Follow [docs/scenario-7-copilot-app-balloon.md](docs/scenario-7-copilot-app-balloon.md)
 
 Two small skills are included under `.github/skills/`. Copilot can use them when relevant; you do not have to invoke them manually.
