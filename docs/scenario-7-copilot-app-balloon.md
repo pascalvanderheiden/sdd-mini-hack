@@ -45,11 +45,11 @@ cd ../balloon-message
 git init -b main
 git add README.md
 git commit -m "Add Scenario 7 instructions"
-gh repo create balloon-message --source=. --remote=origin --push
+gh repo create balloon-message --public --source=. --remote=origin --push
 code .
 ```
 
-`gh repo create` prompts for the owner and repository visibility. Enable GitHub Issues if they are not already available.
+This creates a public repository. Replace `--public` with `--private` or `--internal` if needed. Enable GitHub Issues if they are not already available.
 
 In either option, use the VS Code terminal in the scenario workspace for the remaining setup commands. Confirm the remote and Issues access:
 

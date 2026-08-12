@@ -74,7 +74,7 @@
 | Requirement | macOS install command | Windows install command |
 |---|---|---|
 | Issue tracker | GitHub Issues recommended; local files and GitLab are also supported | GitHub Issues recommended; local files and GitLab are also supported |
-| Scenario repository | Fork the workshop repository, or create a dedicated repository with `gh repo create` | Fork the workshop repository, or create a dedicated repository with `gh repo create` |
+| Scenario repository | Fork the workshop repository, or create a dedicated repository with `gh repo create --public` | Fork the workshop repository, or create a dedicated repository with `gh repo create --public` |
 | GitHub Copilot client | `brew install --cask copilot-cli`, or install the [Desktop App for macOS](https://gh.io/copilot-app-mac) ([installation guide](https://github.com/features/ai/github-app)) | `npm install -g @github/copilot@latest`, or install the [Desktop App for Windows](https://gh.io/copilot-app-win64) ([installation guide](https://github.com/features/ai/github-app)) |
 | Matt Pocock skills | `npx skills@latest add mattpocock/skills` | `npx skills@latest add mattpocock/skills` |
 | GitHub CLI | `brew install gh && gh auth login` | `winget install -e --id GitHub.cli; gh auth login` |

@@ -21,7 +21,7 @@ This is a greenfield scenario. The folder starts with only this README; Copilot 
    code .
    ```
 
-   Alternatively, follow the canonical guide to copy the Scenario 7 instructions into a new folder, run `git init`, and publish a dedicated repository with `gh repo create`.
+   Alternatively, follow the canonical guide to copy the Scenario 7 instructions into a new folder, run `git init`, and publish a dedicated repository with `gh repo create --public`.
 
 2. GitHub Issues are recommended for this workshop. Matt Pocock's setup also supports local files and GitLab.
 
