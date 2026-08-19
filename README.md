@@ -181,10 +181,10 @@ Use **GitHub Copilot CLI or the GitHub Copilot Desktop App**, **GitHub Issues**,
 
 **Demo video**
 
-https://www.youtube.com/watch?v=F3lL98Pj90o&t=3s
+https://github.com/user-attachments/assets/0b850db4-ad44-424e-9fd2-9ce1d4481897
 
 <!-- Fallback for VS Code markdown preview (GitHub renders the link above as a player). -->
-https://github.com/user-attachments/assets/1ecdf27f-d356-4fb7-9e03-e4715e4af12c
+<video src="media/videos/scenario-7-wayfinder.mp4" controls width="720"></video>
 
 → Follow [docs/scenario-7-copilot-app-balloon.md](docs/scenario-7-copilot-app-balloon.md)
 
